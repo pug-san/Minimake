@@ -1240,7 +1240,7 @@
                 
                 <div class="help-item">
                     <div class="help-item-title">📦 Button</div>
-                    <div class="help-item-desc">A clickable button. You can set the button text and onclick action. Use <span class="help-item-code">[varName]</span> to insert variable values.</div>
+                    <div class="help-item-desc">A clickable button. Set the button text. Use <span class="help-item-code">[varName]</span> to insert variable values. Link actions using onClick blocks on the back tab.</div>
                 </div>
 
                 <div class="help-item">
@@ -1260,7 +1260,7 @@
 
                 <div class="help-item">
                     <div class="help-item-title">✅ Checkbox</div>
-                    <div class="help-item-desc">A checkbox with a label. Use <span class="help-item-code">[varName]</span> in the label.</div>
+                    <div class="help-item-desc">A checkbox with a label. Use <span class="help-item-code">[varName]</span> in the label. Link actions using onChange blocks on the back tab.</div>
                 </div>
 
                 <div class="help-item">
@@ -1268,7 +1268,7 @@
                     <div class="help-item-desc">Heading text (H1, H2, H3). Use <span class="help-item-code">[varName]</span> to insert variables.</div>
                 </div>
 
-                <div class="settings-group-title" style="margin-top: 20px;">Back Elements (Variables)</div>
+                <div class="settings-group-title" style="margin-top: 20px;">Back Elements (Variables & Events)</div>
 
                 <div class="help-item">
                     <div class="help-item-title">🔢 Variable</div>
@@ -1278,6 +1278,16 @@
                 <div class="help-item">
                     <div class="help-item-title">💬 String</div>
                     <div class="help-item-desc">Create a text variable. Set a name and text value. Use <span class="help-item-code">[varName]</span> to display it.</div>
+                </div>
+
+                <div class="help-item">
+                    <div class="help-item-title">🖱️ onClick</div>
+                    <div class="help-item-desc">Link an action to a button. Specify the button name and the action to perform when clicked.</div>
+                </div>
+
+                <div class="help-item">
+                    <div class="help-item-title">☑️ onChange</div>
+                    <div class="help-item-desc">Link an action to a checkbox. Specify the checkbox name and the action to perform when changed.</div>
                 </div>
 
                 <div class="settings-group-title" style="margin-top: 20px;">Features</div>
@@ -1379,7 +1389,7 @@
         };
 
         const elementDefaults = {
-            button: { text: 'Click me', onClick: '' },
+            button: { text: 'Click me' },
             text: { text: 'Sample text', style: '' },
             input: { placeholder: 'Enter text', value: '' },
             progress: { value: '[value]', max: '[max]' },
@@ -1392,8 +1402,8 @@
             string: { name: 'myText', value: '""' },
             if: { condition: 'x > 5', then: '' },
             loop: { variable: 'i', start: '0', end: '10' },
-            onclick: { action: '' },
-            onchange: { action: '' }
+            onclick: { buttonName: 'button1', action: '' },
+            onchange: { checkboxName: 'checkbox1', action: '' }
         };
 
         function applyTheme() {
@@ -1726,10 +1736,10 @@
                         content = `for ${elem.variable} in range(${elem.start}, ${elem.end})`;
                         break;
                     case 'onclick':
-                        content = `onClick: ${elem.action || '...'}`;
+                        content = `onClick ${elem.buttonName} ${elem.action || '...'}`;
                         break;
                     case 'onchange':
-                        content = `onChange: ${elem.action || '...'}`;
+                        content = `onChange ${elem.checkboxName} ${elem.action || '...'}`;
                         break;
                 }
 
@@ -1823,46 +1833,44 @@
                 case 'button':
                     html = `
                         <label>Button Text:</label>
-                        <input type="text" id="btnText" value="${elem.text}">
-                        <label>On Click Action:</label>
-                        <input type="text" id="btnAction" placeholder="e.g., alert('Clicked!')">
+                        <input type="text" id="btnText" value="${elem.text || ''}">
                         <div style="font-size: 11px; color: #666; margin-top: 5px;">Use [varName] for variables</div>
                     `;
                     break;
                 case 'text':
                     html = `
                         <label>Text Content:</label>
-                        <input type="text" id="textContent" value="${elem.text}">
+                        <input type="text" id="textContent" value="${elem.text || ''}">
                         <div style="font-size: 11px; color: #666; margin-top: 5px;">Use [varName] for variables</div>
                     `;
                     break;
                 case 'input':
                     html = `
                         <label>Placeholder:</label>
-                        <input type="text" id="inputPlaceholder" value="${elem.placeholder}">
+                        <input type="text" id="inputPlaceholder" value="${elem.placeholder || ''}">
                         <div style="font-size: 11px; color: #666; margin-top: 5px;">Use [varName] for variables</div>
                     `;
                     break;
                 case 'progress':
                     html = `
                         <label>Current Value:</label>
-                        <input type="text" id="progressValue" value="${elem.value}">
+                        <input type="text" id="progressValue" value="${elem.value || ''}">
                         <label>Max Value:</label>
-                        <input type="text" id="progressMax" value="${elem.max}">
+                        <input type="text" id="progressMax" value="${elem.max || ''}">
                         <div style="font-size: 11px; color: #666; margin-top: 5px;">Use [varName] for dynamic values!</div>
                     `;
                     break;
                 case 'checkbox':
                     html = `
                         <label>Label:</label>
-                        <input type="text" id="checkboxText" value="${elem.text}">
+                        <input type="text" id="checkboxText" value="${elem.text || ''}">
                         <div style="font-size: 11px; color: #666; margin-top: 5px;">Use [varName] for variables</div>
                     `;
                     break;
                 case 'heading':
                     html = `
                         <label>Heading Text:</label>
-                        <input type="text" id="headingText" value="${elem.text}">
+                        <input type="text" id="headingText" value="${elem.text || ''}">
                         <label>Heading Level:</label>
                         <select id="headingLevel">
                             <option value="1" ${elem.level === 1 ? 'selected' : ''}>H1</option>
@@ -1907,40 +1915,49 @@
                 case 'variable':
                     html = `
                         <label>Variable Name:</label>
-                        <input type="text" id="varName" value="${elem.name}">
+                        <input type="text" id="varName" value="${elem.name || ''}">
                         <label>Value:</label>
-                        <input type="text" id="varValue" value="${elem.value}">
+                        <input type="text" id="varValue" value="${elem.value || ''}">
                     `;
                     break;
                 case 'string':
                     html = `
                         <label>Variable Name:</label>
-                        <input type="text" id="strName" value="${elem.name}">
+                        <input type="text" id="strName" value="${elem.name || ''}">
                         <label>Value:</label>
-                        <input type="text" id="strValue" value="${elem.value}">
+                        <input type="text" id="strValue" value="${elem.value || ''}">
                     `;
                     break;
                 case 'if':
                     html = `
                         <label>Condition:</label>
-                        <input type="text" id="ifCondition" value="${elem.condition}">
+                        <input type="text" id="ifCondition" value="${elem.condition || ''}">
                     `;
                     break;
                 case 'loop':
                     html = `
                         <label>Variable:</label>
-                        <input type="text" id="loopVar" value="${elem.variable}">
+                        <input type="text" id="loopVar" value="${elem.variable || ''}">
                         <label>Start:</label>
-                        <input type="number" id="loopStart" value="${elem.start}">
+                        <input type="number" id="loopStart" value="${elem.start || ''}">
                         <label>End:</label>
-                        <input type="number" id="loopEnd" value="${elem.end}">
+                        <input type="number" id="loopEnd" value="${elem.end || ''}">
                     `;
                     break;
                 case 'onclick':
+                    html = `
+                        <label>Button Name:</label>
+                        <input type="text" id="buttonName" value="${elem.buttonName || ''}">
+                        <label>Action:</label>
+                        <input type="text" id="onclickAction" value="${elem.action || ''}">
+                    `;
+                    break;
                 case 'onchange':
                     html = `
+                        <label>Checkbox Name:</label>
+                        <input type="text" id="checkboxName" value="${elem.checkboxName || ''}">
                         <label>Action:</label>
-                        <input type="text" id="eventAction" value="${elem.action}">
+                        <input type="text" id="onchangeAction" value="${elem.action || ''}">
                     `;
                     break;
             }
@@ -1973,7 +1990,6 @@
             switch (elem.type) {
                 case 'button':
                     elem.text = document.getElementById('btnText').value;
-                    elem.onClick = document.getElementById('btnAction').value;
                     break;
                 case 'text':
                     elem.text = document.getElementById('textContent').value;
@@ -2021,8 +2037,12 @@
                     elem.end = document.getElementById('loopEnd').value;
                     break;
                 case 'onclick':
+                    elem.buttonName = document.getElementById('buttonName').value;
+                    elem.action = document.getElementById('onclickAction').value;
+                    break;
                 case 'onchange':
-                    elem.action = document.getElementById('eventAction').value;
+                    elem.checkboxName = document.getElementById('checkboxName').value;
+                    elem.action = document.getElementById('onchangeAction').value;
                     break;
             }
 
@@ -2089,8 +2109,7 @@
             sortedElements.forEach(elem => {
                 switch (elem.type) {
                     case 'button':
-                        const onClickAttr = elem.onClick ? ` onclick="${interpolateVariables(elem.onClick, variables)}"` : '';
-                        bodyContent += `<button style="cursor: pointer; padding: 6px 12px; margin: 8px;"${onClickAttr}>${interpolateVariables(elem.text, variables)}</button><br>`;
+                        bodyContent += `<button style="cursor: pointer; padding: 6px 12px; margin: 8px;">${interpolateVariables(elem.text, variables)}</button><br>`;
                         break;
                     case 'text':
                         bodyContent += `<p style="margin: 8px;">${interpolateVariables(elem.text, variables)}</p>`;
@@ -2178,7 +2197,6 @@
             };
             reader.readAsText(file);
             
-            // Reset file input
             e.target.value = '';
         });
 
