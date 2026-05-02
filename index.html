@@ -408,6 +408,8 @@
             z-index: 2000;
             min-width: 200px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-height: 400px;
+            overflow-y: auto;
         }
 
         .dark-mode .editor-menu {
@@ -1145,6 +1147,11 @@
             gap: 8px;
             padding: 0 10px 10px 10px;
         }
+
+        .canvas-item img {
+            max-width: 100%;
+            max-height: 100%;
+        }
     </style>
 </head>
 <body>
@@ -1171,6 +1178,7 @@
                     <div class="element-item" draggable="true" data-type="progress">Progress Bar</div>
                     <div class="element-item" draggable="true" data-type="checkbox">Checkbox</div>
                     <div class="element-item" draggable="true" data-type="heading">Heading</div>
+                    <div class="element-item" draggable="true" data-type="image">Image</div>
                 </div>
             </div>
 
@@ -1240,7 +1248,7 @@
                 
                 <div class="help-item">
                     <div class="help-item-title">📦 Button</div>
-                    <div class="help-item-desc">A clickable button. Set the button text. Use <span class="help-item-code">[varName]</span> to insert variable values. Link actions using onClick blocks on the back tab.</div>
+                    <div class="help-item-desc">A clickable button. Set the button text and give it a unique name (e.g., "submitBtn"). Use <span class="help-item-code">[varName]</span> for variables. Link actions using onClick blocks in the back tab.</div>
                 </div>
 
                 <div class="help-item">
@@ -1260,12 +1268,17 @@
 
                 <div class="help-item">
                     <div class="help-item-title">✅ Checkbox</div>
-                    <div class="help-item-desc">A checkbox with a label. Use <span class="help-item-code">[varName]</span> in the label. Link actions using onChange blocks on the back tab.</div>
+                    <div class="help-item-desc">A checkbox with a label. Give it a unique name (e.g., "agreeCheckbox"). Use <span class="help-item-code">[varName]</span> in the label. Link actions using onChange blocks in the back tab.</div>
                 </div>
 
                 <div class="help-item">
                     <div class="help-item-title">📌 Heading</div>
                     <div class="help-item-desc">Heading text (H1, H2, H3). Use <span class="help-item-code">[varName]</span> to insert variables.</div>
+                </div>
+
+                <div class="help-item">
+                    <div class="help-item-title">🖼️ Image</div>
+                    <div class="help-item-desc">Display an image. Paste the image URL and set the width and height. Use <span class="help-item-code">[varName]</span> for dynamic image URLs!</div>
                 </div>
 
                 <div class="settings-group-title" style="margin-top: 20px;">Back Elements (Variables & Events)</div>
@@ -1282,12 +1295,12 @@
 
                 <div class="help-item">
                     <div class="help-item-title">🖱️ onClick</div>
-                    <div class="help-item-desc">Link an action to a button. Specify the button name and the action to perform when clicked.</div>
+                    <div class="help-item-desc">Link an action to a button. Select the button name from the dropdown and enter the action to perform when clicked.</div>
                 </div>
 
                 <div class="help-item">
                     <div class="help-item-title">☑️ onChange</div>
-                    <div class="help-item-desc">Link an action to a checkbox. Specify the checkbox name and the action to perform when changed.</div>
+                    <div class="help-item-desc">Link an action to a checkbox. Select the checkbox name from the dropdown and enter the action to perform when changed.</div>
                 </div>
 
                 <div class="settings-group-title" style="margin-top: 20px;">Features</div>
@@ -1389,12 +1402,13 @@
         };
 
         const elementDefaults = {
-            button: { text: 'Click me' },
+            button: { text: 'Click me', name: 'button1' },
             text: { text: 'Sample text', style: '' },
             input: { placeholder: 'Enter text', value: '' },
             progress: { value: '[value]', max: '[max]' },
-            checkbox: { text: 'Check me', checked: false },
-            heading: { text: 'Heading', level: 1 }
+            checkbox: { text: 'Check me', name: 'checkbox1', checked: false },
+            heading: { text: 'Heading', level: 1 },
+            image: { src: 'https://via.placeholder.com/200', width: '200', height: '150' }
         };
 
         const codeBlockDefaults = {
@@ -1402,8 +1416,8 @@
             string: { name: 'myText', value: '""' },
             if: { condition: 'x > 5', then: '' },
             loop: { variable: 'i', start: '0', end: '10' },
-            onclick: { buttonName: 'button1', action: '' },
-            onchange: { checkboxName: 'checkbox1', action: '' }
+            onclick: { buttonName: '', action: '' },
+            onchange: { checkboxName: '', action: '' }
         };
 
         function applyTheme() {
@@ -1541,6 +1555,20 @@
             }
         }
 
+        function getButtonNames() {
+            return state.frontElements
+                .filter(e => e.type === 'button')
+                .map(e => e.name || '')
+                .filter(n => n);
+        }
+
+        function getCheckboxNames() {
+            return state.frontElements
+                .filter(e => e.type === 'checkbox')
+                .map(e => e.name || '')
+                .filter(n => n);
+        }
+
         document.querySelectorAll('.tab-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -1676,6 +1704,9 @@
                         break;
                     case 'heading':
                         content = `<h${elem.level}>${elem.text}</h${elem.level}>`;
+                        break;
+                    case 'image':
+                        content = `<img src="${elem.src}" style="width: ${elem.width}px; height: ${elem.height}px; object-fit: cover;">`;
                         break;
                 }
 
@@ -1834,6 +1865,8 @@
                     html = `
                         <label>Button Text:</label>
                         <input type="text" id="btnText" value="${elem.text || ''}">
+                        <label>Button Name (for events):</label>
+                        <input type="text" id="btnName" value="${elem.name || ''}">
                         <div style="font-size: 11px; color: #666; margin-top: 5px;">Use [varName] for variables</div>
                     `;
                     break;
@@ -1864,6 +1897,8 @@
                     html = `
                         <label>Label:</label>
                         <input type="text" id="checkboxText" value="${elem.text || ''}">
+                        <label>Checkbox Name (for events):</label>
+                        <input type="text" id="checkboxName" value="${elem.name || ''}">
                         <div style="font-size: 11px; color: #666; margin-top: 5px;">Use [varName] for variables</div>
                     `;
                     break;
@@ -1878,6 +1913,17 @@
                             <option value="3" ${elem.level === 3 ? 'selected' : ''}>H3</option>
                         </select>
                         <div style="font-size: 11px; color: #666; margin-top: 5px;">Use [varName] for variables</div>
+                    `;
+                    break;
+                case 'image':
+                    html = `
+                        <label>Image URL:</label>
+                        <input type="text" id="imageSrc" value="${elem.src || ''}">
+                        <label>Width (px):</label>
+                        <input type="number" id="imageWidth" value="${elem.width || ''}">
+                        <label>Height (px):</label>
+                        <input type="number" id="imageHeight" value="${elem.height || ''}">
+                        <div style="font-size: 11px; color: #666; margin-top: 5px;">Use [varName] for dynamic URLs</div>
                     `;
                     break;
             }
@@ -1945,19 +1991,29 @@
                     `;
                     break;
                 case 'onclick':
+                    const buttonNames = getButtonNames();
                     html = `
-                        <label>Button Name:</label>
-                        <input type="text" id="buttonName" value="${elem.buttonName || ''}">
+                        <label>Select Button:</label>
+                        <select id="buttonName">
+                            <option value="">-- Choose a button --</option>
+                            ${buttonNames.map(name => `<option value="${name}" ${elem.buttonName === name ? 'selected' : ''}>${name}</option>`).join('')}
+                        </select>
                         <label>Action:</label>
                         <input type="text" id="onclickAction" value="${elem.action || ''}">
+                        <div style="font-size: 11px; color: #666; margin-top: 5px;">Example: alert('Button clicked!')</div>
                     `;
                     break;
                 case 'onchange':
+                    const checkboxNames = getCheckboxNames();
                     html = `
-                        <label>Checkbox Name:</label>
-                        <input type="text" id="checkboxName" value="${elem.checkboxName || ''}">
+                        <label>Select Checkbox:</label>
+                        <select id="checkboxName">
+                            <option value="">-- Choose a checkbox --</option>
+                            ${checkboxNames.map(name => `<option value="${name}" ${elem.checkboxName === name ? 'selected' : ''}>${name}</option>`).join('')}
+                        </select>
                         <label>Action:</label>
                         <input type="text" id="onchangeAction" value="${elem.action || ''}">
+                        <div style="font-size: 11px; color: #666; margin-top: 5px;">Example: alert('Checkbox toggled!')</div>
                     `;
                     break;
             }
@@ -1990,6 +2046,7 @@
             switch (elem.type) {
                 case 'button':
                     elem.text = document.getElementById('btnText').value;
+                    elem.name = document.getElementById('btnName').value;
                     break;
                 case 'text':
                     elem.text = document.getElementById('textContent').value;
@@ -2003,15 +2060,22 @@
                     break;
                 case 'checkbox':
                     elem.text = document.getElementById('checkboxText').value;
+                    elem.name = document.getElementById('checkboxName').value;
                     break;
                 case 'heading':
                     elem.text = document.getElementById('headingText').value;
                     elem.level = parseInt(document.getElementById('headingLevel').value);
                     break;
+                case 'image':
+                    elem.src = document.getElementById('imageSrc').value;
+                    elem.width = document.getElementById('imageWidth').value;
+                    elem.height = document.getElementById('imageHeight').value;
+                    break;
             }
 
             closeAllMenus();
             renderFrontElements();
+            renderBackElements();
             playSound('success');
         };
 
@@ -2055,6 +2119,7 @@
             state.frontElements = state.frontElements.filter(e => e.id !== id);
             closeAllMenus();
             renderFrontElements();
+            renderBackElements();
             playSound('delete');
         };
 
@@ -2127,6 +2192,10 @@
                         break;
                     case 'heading':
                         bodyContent += `<h${elem.level}>${interpolateVariables(elem.text, variables)}</h${elem.level}>`;
+                        break;
+                    case 'image':
+                        const imageSrc = interpolateVariables(elem.src, variables);
+                        bodyContent += `<img src="${imageSrc}" style="width: ${elem.width}px; height: ${elem.height}px; object-fit: cover; margin: 8px;">`;
                         break;
                 }
             });
