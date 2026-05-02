@@ -1,0 +1,2076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Designer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background: #fff;
+            color: #000;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        body.dark-mode {
+            background: #1e1e1e;
+            color: #e0e0e0;
+        }
+
+        body.poipole {
+            background: #faf6ff;
+        }
+
+        body.dark-mode.poipole {
+            background: #2a1a3a;
+        }
+
+        .header {
+            border-bottom: 1px solid #ccc;
+            padding: 10px 20px;
+            display: flex;
+            gap: 20px;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dark-mode .header {
+            border-bottom-color: #444;
+            background: #262626;
+        }
+
+        .poipole .header {
+            border-bottom-color: #d4a5ff;
+        }
+
+        .dark-mode.poipole .header {
+            border-bottom-color: #6b4c99;
+            background: #331a4d;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+        }
+
+        .tab-btn {
+            padding: 8px 16px;
+            border: 1px solid #ccc;
+            background: #f5f5f5;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .dark-mode .tab-btn {
+            border-color: #444;
+            background: #333;
+            color: #e0e0e0;
+        }
+
+        .poipole .tab-btn {
+            border-color: #d4a5ff;
+            background: #f0e6ff;
+            color: #4a2e6b;
+        }
+
+        .dark-mode.poipole .tab-btn {
+            border-color: #6b4c99;
+            background: #441a66;
+            color: #e0b3ff;
+        }
+
+        .tab-btn.active {
+            background: #fff;
+            border-bottom: 2px solid #000;
+        }
+
+        .dark-mode .tab-btn.active {
+            background: #1e1e1e;
+            border-bottom-color: #e0e0e0;
+        }
+
+        .poipole .tab-btn.active {
+            background: #fff;
+            border-bottom-color: #9d4edd;
+        }
+
+        .dark-mode.poipole .tab-btn.active {
+            background: #2a1a3a;
+            border-bottom-color: #d4a5ff;
+        }
+
+        .tab-btn:hover {
+            background: #f0f0f0;
+        }
+
+        .dark-mode .tab-btn:hover {
+            background: #3a3a3a;
+        }
+
+        .poipole .tab-btn:hover {
+            background: #e6d4ff;
+        }
+
+        .dark-mode.poipole .tab-btn:hover {
+            background: #552d7a;
+        }
+
+        .header-right {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .settings-btn {
+            padding: 8px 16px;
+            border: 1px solid #ccc;
+            background: #f5f5f5;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 3px;
+        }
+
+        .dark-mode .settings-btn {
+            border-color: #444;
+            background: #333;
+            color: #e0e0e0;
+        }
+
+        .poipole .settings-btn {
+            border-color: #d4a5ff;
+            background: #f0e6ff;
+            color: #4a2e6b;
+        }
+
+        .dark-mode.poipole .settings-btn {
+            border-color: #6b4c99;
+            background: #441a66;
+            color: #e0b3ff;
+        }
+
+        .settings-btn:hover {
+            background: #f0f0f0;
+        }
+
+        .dark-mode .settings-btn:hover {
+            background: #3a3a3a;
+        }
+
+        .poipole .settings-btn:hover {
+            background: #e6d4ff;
+        }
+
+        .dark-mode.poipole .settings-btn:hover {
+            background: #552d7a;
+        }
+
+        .container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .sidebar {
+            width: 250px;
+            border-right: 1px solid #ccc;
+            display: flex;
+            flex-direction: column;
+            background: #f9f9f9;
+        }
+
+        .dark-mode .sidebar {
+            border-right-color: #444;
+            background: #2a2a2a;
+        }
+
+        .poipole .sidebar {
+            border-right-color: #d4a5ff;
+            background: #faf6ff;
+        }
+
+        .dark-mode.poipole .sidebar {
+            border-right-color: #6b4c99;
+            background: #3a2847;
+        }
+
+        .sidebar-title {
+            padding: 12px;
+            border-bottom: 1px solid #ccc;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .dark-mode .sidebar-title {
+            border-bottom-color: #444;
+        }
+
+        .poipole .sidebar-title {
+            border-bottom-color: #d4a5ff;
+            color: #4a2e6b;
+        }
+
+        .dark-mode.poipole .sidebar-title {
+            border-bottom-color: #6b4c99;
+            color: #e0b3ff;
+        }
+
+        .elements-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+        }
+
+        .element-item {
+            padding: 8px;
+            margin: 4px 0;
+            border: 1px solid #ccc;
+            background: #fff;
+            cursor: grab;
+            font-size: 13px;
+            border-radius: 3px;
+        }
+
+        .dark-mode .element-item {
+            border-color: #444;
+            background: #333;
+            color: #e0e0e0;
+        }
+
+        .poipole .element-item {
+            border-color: #d4a5ff;
+            background: #f8f0ff;
+            color: #4a2e6b;
+        }
+
+        .dark-mode.poipole .element-item {
+            border-color: #6b4c99;
+            background: #441a66;
+            color: #e0b3ff;
+        }
+
+        .element-item:active {
+            cursor: grabbing;
+        }
+
+        .sidebar-buttons {
+            border-top: 1px solid #ccc;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .dark-mode .sidebar-buttons {
+            border-top-color: #444;
+        }
+
+        .poipole .sidebar-buttons {
+            border-top-color: #d4a5ff;
+        }
+
+        .dark-mode.poipole .sidebar-buttons {
+            border-top-color: #6b4c99;
+        }
+
+        .sidebar-buttons button {
+            padding: 10px;
+            border: 1px solid #ccc;
+            background: #fff;
+            cursor: pointer;
+            font-size: 13px;
+            border-radius: 3px;
+        }
+
+        .dark-mode .sidebar-buttons button {
+            border-color: #444;
+            background: #333;
+            color: #e0e0e0;
+        }
+
+        .poipole .sidebar-buttons button {
+            border-color: #d4a5ff;
+            background: #f8f0ff;
+            color: #4a2e6b;
+        }
+
+        .dark-mode.poipole .sidebar-buttons button {
+            border-color: #6b4c99;
+            background: #441a66;
+            color: #e0b3ff;
+        }
+
+        .sidebar-buttons button:hover {
+            background: #f5f5f5;
+        }
+
+        .dark-mode .sidebar-buttons button:hover {
+            background: #3a3a3a;
+        }
+
+        .poipole .sidebar-buttons button:hover {
+            background: #e6d4ff;
+        }
+
+        .dark-mode.poipole .sidebar-buttons button:hover {
+            background: #552d7a;
+        }
+
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .canvas {
+            flex: 1;
+            overflow: auto;
+            position: relative;
+            background: #fafafa;
+        }
+
+        .dark-mode .canvas {
+            background: #1e1e1e;
+        }
+
+        .poipole .canvas {
+            background: #faf6ff;
+        }
+
+        .dark-mode.poipole .canvas {
+            background: #2a1a3a;
+        }
+
+        .canvas-item {
+            position: absolute;
+            cursor: move;
+            padding: 8px 12px;
+            border: 1px solid #999;
+            background: #fff;
+            border-radius: 3px;
+            user-select: none;
+            min-width: 60px;
+        }
+
+        .dark-mode .canvas-item {
+            border-color: #555;
+            background: #333;
+            color: #e0e0e0;
+        }
+
+        .poipole .canvas-item {
+            border-color: #c99aff;
+            background: #f8f0ff;
+            color: #4a2e6b;
+        }
+
+        .dark-mode.poipole .canvas-item {
+            border-color: #8866bb;
+            background: #441a66;
+            color: #e0b3ff;
+        }
+
+        .canvas-item.selected {
+            border: 2px solid #0066cc;
+            outline: 1px dashed #0066cc;
+        }
+
+        .poipole .canvas-item.selected {
+            border-color: #9d4edd;
+            outline-color: #9d4edd;
+        }
+
+        .dark-mode.poipole .canvas-item.selected {
+            border-color: #d4a5ff;
+            outline-color: #d4a5ff;
+        }
+
+        .editor-menu {
+            position: fixed;
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            padding: 8px;
+            z-index: 2000;
+            min-width: 200px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .dark-mode .editor-menu {
+            background: #2a2a2a;
+            border-color: #444;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.5);
+            color: #e0e0e0;
+        }
+
+        .poipole .editor-menu {
+            background: #f8f0ff;
+            border-color: #d4a5ff;
+        }
+
+        .dark-mode.poipole .editor-menu {
+            background: #3a2847;
+            border-color: #6b4c99;
+            color: #e0b3ff;
+        }
+
+        .editor-menu label {
+            display: block;
+            font-size: 12px;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        .editor-menu input,
+        .editor-menu select {
+            width: 100%;
+            padding: 6px;
+            margin-bottom: 8px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+
+        .dark-mode .editor-menu input,
+        .dark-mode .editor-menu select {
+            border-color: #444;
+            background: #333;
+            color: #e0e0e0;
+        }
+
+        .poipole .editor-menu input,
+        .poipole .editor-menu select {
+            border-color: #d4a5ff;
+            background: #fff;
+            color: #4a2e6b;
+        }
+
+        .dark-mode.poipole .editor-menu input,
+        .dark-mode.poipole .editor-menu select {
+            border-color: #6b4c99;
+            background: #441a66;
+            color: #e0b3ff;
+        }
+
+        .editor-menu button {
+            padding: 6px 12px;
+            margin-right: 4px;
+            margin-top: 8px;
+            border: 1px solid #ccc;
+            background: #fff;
+            cursor: pointer;
+            font-size: 12px;
+            border-radius: 3px;
+        }
+
+        .dark-mode .editor-menu button {
+            border-color: #444;
+            background: #333;
+            color: #e0e0e0;
+        }
+
+        .poipole .editor-menu button {
+            border-color: #d4a5ff;
+            background: #f0e6ff;
+            color: #4a2e6b;
+        }
+
+        .dark-mode.poipole .editor-menu button {
+            border-color: #6b4c99;
+            background: #551a88;
+            color: #e0b3ff;
+        }
+
+        .editor-menu button:hover {
+            background: #f5f5f5;
+        }
+
+        .dark-mode .editor-menu button:hover {
+            background: #3a3a3a;
+        }
+
+        .poipole .editor-menu button:hover {
+            background: #e6d4ff;
+        }
+
+        .dark-mode.poipole .editor-menu button:hover {
+            background: #663399;
+        }
+
+        .code-block {
+            padding: 8px;
+            border: 1px solid #ccc;
+            background: #e8f4f8;
+            cursor: grab;
+            font-size: 12px;
+            border-radius: 3px;
+            text-align: center;
+            font-family: monospace;
+        }
+
+        .dark-mode .code-block {
+            border-color: #444;
+            background: #1e3a42;
+            color: #b3e5fc;
+        }
+
+        .poipole .code-block {
+            border-color: #d4a5ff;
+            background: #efe6ff;
+            color: #4a2e6b;
+        }
+
+        .dark-mode.poipole .code-block {
+            border-color: #6b4c99;
+            background: #3a2847;
+            color: #d4a5ff;
+        }
+
+        .code-block:active {
+            cursor: grabbing;
+        }
+
+        .code-workspace {
+            flex: 1;
+            border: 1px solid #ccc;
+            margin: 10px;
+            overflow: auto;
+            background: #fafafa;
+            position: relative;
+        }
+
+        .dark-mode .code-workspace {
+            border-color: #444;
+            background: #1e1e1e;
+        }
+
+        .poipole .code-workspace {
+            border-color: #d4a5ff;
+            background: #faf6ff;
+        }
+
+        .dark-mode.poipole .code-workspace {
+            border-color: #6b4c99;
+            background: #2a1a3a;
+        }
+
+        .code-item {
+            position: absolute;
+            background: #e8f4f8;
+            border: 2px solid #0066cc;
+            padding: 8px 12px;
+            border-radius: 6px;
+            cursor: move;
+            font-family: monospace;
+            font-size: 12px;
+            min-width: 100px;
+            box-shadow: 0 2px 4px rgba(0, 102, 204, 0.3);
+        }
+
+        .dark-mode .code-item {
+            background: #1e3a42;
+            border-color: #0fa8d1;
+            box-shadow: 0 2px 4px rgba(15, 168, 209, 0.3);
+            color: #b3e5fc;
+        }
+
+        .poipole .code-item {
+            background: #efe6ff;
+            border-color: #9d4edd;
+            box-shadow: 0 2px 4px rgba(157, 78, 221, 0.3);
+            color: #4a2e6b;
+        }
+
+        .dark-mode.poipole .code-item {
+            background: #3a2847;
+            border-color: #d4a5ff;
+            box-shadow: 0 2px 4px rgba(212, 165, 255, 0.3);
+            color: #d4a5ff;
+        }
+
+        .code-item.selected {
+            border: 2px solid #0066cc;
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.2);
+        }
+
+        .poipole .code-item.selected {
+            border-color: #9d4edd;
+            box-shadow: 0 0 0 3px rgba(157, 78, 221, 0.2);
+        }
+
+        .dark-mode.poipole .code-item.selected {
+            border-color: #d4a5ff;
+            box-shadow: 0 0 0 3px rgba(212, 165, 255, 0.2);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: flex;
+            flex: 1;
+        }
+
+        .back-tab {
+            flex-direction: column;
+        }
+
+        .preview-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 3000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .preview-modal.active {
+            display: flex;
+        }
+
+        .preview-content {
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 90%;
+            height: 90%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .dark-mode .preview-content {
+            background: #2a2a2a;
+            border-color: #444;
+            color: #e0e0e0;
+        }
+
+        .poipole .preview-content {
+            background: #f8f0ff;
+            border-color: #d4a5ff;
+        }
+
+        .dark-mode.poipole .preview-content {
+            background: #3a2847;
+            border-color: #6b4c99;
+        }
+
+        .preview-header {
+            border-bottom: 1px solid #ccc;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .dark-mode .preview-header {
+            border-bottom-color: #444;
+        }
+
+        .poipole .preview-header {
+            border-bottom-color: #d4a5ff;
+        }
+
+        .dark-mode.poipole .preview-header {
+            border-bottom-color: #6b4c99;
+        }
+
+        .preview-header button {
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            background: #fff;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        .dark-mode .preview-header button {
+            border-color: #444;
+            background: #333;
+            color: #e0e0e0;
+        }
+
+        .poipole .preview-header button {
+            border-color: #d4a5ff;
+            background: #f0e6ff;
+            color: #4a2e6b;
+        }
+
+        .dark-mode.poipole .preview-header button {
+            border-color: #6b4c99;
+            background: #441a66;
+            color: #e0b3ff;
+        }
+
+        .preview-header button:hover {
+            background: #f5f5f5;
+        }
+
+        .dark-mode .preview-header button:hover {
+            background: #3a3a3a;
+        }
+
+        .poipole .preview-header button:hover {
+            background: #e6d4ff;
+        }
+
+        .dark-mode.poipole .preview-header button:hover {
+            background: #552d7a;
+        }
+
+        .preview-iframe {
+            flex: 1;
+            border: none;
+        }
+
+        .delete-btn {
+            color: #d32f2f;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+        .dark-mode .delete-btn {
+            color: #ff6b6b;
+        }
+
+        .poipole .delete-btn {
+            color: #c41e3a;
+        }
+
+        .dark-mode.poipole .delete-btn {
+            color: #ff99cc;
+        }
+
+        .delete-btn:hover {
+            text-decoration: underline;
+        }
+
+        .block-category {
+            margin-bottom: 15px;
+        }
+
+        .block-category-title {
+            font-weight: bold;
+            font-size: 12px;
+            padding: 8px;
+            background: #e0e0e0;
+            border-radius: 3px;
+            margin-bottom: 8px;
+        }
+
+        .dark-mode .block-category-title {
+            background: #3a3a3a;
+            color: #e0e0e0;
+        }
+
+        .poipole .block-category-title {
+            background: #e6d4ff;
+            color: #4a2e6b;
+        }
+
+        .dark-mode.poipole .block-category-title {
+            background: #551a88;
+            color: #e0b3ff;
+        }
+
+        .code-blocks-category {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding: 0 10px 10px 10px;
+        }
+
+        /* Settings Modal */
+        .settings-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 3000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .settings-modal.active {
+            display: flex;
+        }
+
+        .settings-content {
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 400px;
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+
+        .dark-mode .settings-content {
+            background: #2a2a2a;
+            border-color: #444;
+            color: #e0e0e0;
+        }
+
+        .poipole .settings-content {
+            background: #f8f0ff;
+            border-color: #d4a5ff;
+        }
+
+        .dark-mode.poipole .settings-content {
+            background: #3a2847;
+            border-color: #6b4c99;
+            color: #e0b3ff;
+        }
+
+        .settings-header {
+            border-bottom: 1px solid #ccc;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .dark-mode .settings-header {
+            border-bottom-color: #444;
+        }
+
+        .poipole .settings-header {
+            border-bottom-color: #d4a5ff;
+            color: #4a2e6b;
+        }
+
+        .dark-mode.poipole .settings-header {
+            border-bottom-color: #6b4c99;
+            color: #e0b3ff;
+        }
+
+        .settings-header button {
+            background: none;
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .settings-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        .settings-group {
+            margin-bottom: 25px;
+        }
+
+        .settings-group-title {
+            font-weight: bold;
+            font-size: 14px;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .dark-mode .settings-group-title {
+            border-bottom-color: #444;
+        }
+
+        .poipole .settings-group-title {
+            border-bottom-color: #d4a5ff;
+            color: #4a2e6b;
+        }
+
+        .dark-mode.poipole .settings-group-title {
+            border-bottom-color: #6b4c99;
+            color: #d4a5ff;
+        }
+
+        .setting-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .setting-label {
+            font-size: 13px;
+        }
+
+        /* Toggle Switch */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider {
+            background-color: #0066cc;
+        }
+
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+
+        .poipole .slider {
+            background-color: #e0c4ff;
+        }
+
+        .poipole input:checked + .slider {
+            background-color: #9d4edd;
+        }
+
+        .dark-mode .slider {
+            background-color: #444;
+        }
+
+        .dark-mode input:checked + .slider {
+            background-color: #0fa8d1;
+        }
+
+        .dark-mode.poipole .slider {
+            background-color: #3a1a5c;
+        }
+
+        .dark-mode.poipole input:checked + .slider {
+            background-color: #d4a5ff;
+        }
+
+        /* Slider for Volume */
+        .volume-slider {
+            width: 100%;
+            height: 6px;
+            border-radius: 5px;
+            background: #ddd;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .dark-mode .volume-slider {
+            background: #444;
+        }
+
+        .poipole .volume-slider {
+            background: #e0c4ff;
+        }
+
+        .dark-mode.poipole .volume-slider {
+            background: #3a1a5c;
+        }
+
+        .volume-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #0066cc;
+            cursor: pointer;
+        }
+
+        .volume-slider::-moz-range-thumb {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #0066cc;
+            cursor: pointer;
+        }
+
+        .poipole .volume-slider::-webkit-slider-thumb {
+            background: #9d4edd;
+        }
+
+        .poipole .volume-slider::-moz-range-thumb {
+            background: #9d4edd;
+        }
+
+        .dark-mode.poipole .volume-slider::-webkit-slider-thumb {
+            background: #d4a5ff;
+        }
+
+        .dark-mode.poipole .volume-slider::-moz-range-thumb {
+            background: #d4a5ff;
+        }
+
+        .volume-display {
+            margin-top: 5px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .dark-mode .volume-display {
+            color: #999;
+        }
+
+        .poipole .volume-display {
+            color: #6b4c99;
+        }
+
+        .dark-mode.poipole .volume-display {
+            color: #c4a5ff;
+        }
+
+        .test-btn {
+            padding: 8px 12px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            background: #f5f5f5;
+            cursor: pointer;
+            font-size: 12px;
+            border-radius: 3px;
+            width: 100%;
+        }
+
+        .dark-mode .test-btn {
+            border-color: #444;
+            background: #333;
+            color: #e0e0e0;
+        }
+
+        .poipole .test-btn {
+            border-color: #d4a5ff;
+            background: #f0e6ff;
+            color: #4a2e6b;
+        }
+
+        .dark-mode.poipole .test-btn {
+            border-color: #6b4c99;
+            background: #441a66;
+            color: #e0b3ff;
+        }
+
+        .test-btn:hover {
+            background: #f0f0f0;
+        }
+
+        .dark-mode .test-btn:hover {
+            background: #3a3a3a;
+        }
+
+        .poipole .test-btn:hover {
+            background: #e6d4ff;
+        }
+
+        .dark-mode.poipole .test-btn:hover {
+            background: #552d7a;
+        }
+
+        .repo-link {
+            padding: 8px 12px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            background: #f5f5f5;
+            cursor: pointer;
+            font-size: 12px;
+            border-radius: 3px;
+            width: 100%;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            color: #000;
+        }
+
+        .dark-mode .repo-link {
+            border-color: #444;
+            background: #333;
+            color: #e0e0e0;
+        }
+
+        .poipole .repo-link {
+            border-color: #d4a5ff;
+            background: #f0e6ff;
+            color: #4a2e6b;
+        }
+
+        .dark-mode.poipole .repo-link {
+            border-color: #6b4c99;
+            background: #441a66;
+            color: #e0b3ff;
+        }
+
+        .repo-link:hover {
+            background: #f0f0f0;
+        }
+
+        .dark-mode .repo-link:hover {
+            background: #3a3a3a;
+        }
+
+        .poipole .repo-link:hover {
+            background: #e6d4ff;
+        }
+
+        .dark-mode.poipole .repo-link:hover {
+            background: #552d7a;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="front">Front</button>
+            <button class="tab-btn" data-tab="back">Back</button>
+        </div>
+        <div class="header-right">
+            <button class="settings-btn" id="settingsBtn">⚙️ Settings</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="sidebar">
+            <div class="sidebar-title" id="sidebarTitle">Elements</div>
+            
+            <div id="frontTab" class="tab-section">
+                <div class="elements-list" id="elementsList">
+                    <div class="element-item" draggable="true" data-type="button">Button</div>
+                    <div class="element-item" draggable="true" data-type="text">Text</div>
+                    <div class="element-item" draggable="true" data-type="input">Input</div>
+                    <div class="element-item" draggable="true" data-type="progress">Progress Bar</div>
+                    <div class="element-item" draggable="true" data-type="checkbox">Checkbox</div>
+                    <div class="element-item" draggable="true" data-type="heading">Heading</div>
+                </div>
+            </div>
+
+            <div id="backTab" class="tab-section" style="display: none; flex: 1; overflow-y: auto;">
+                <div class="block-category">
+                    <div class="block-category-title">Variables</div>
+                    <div class="code-blocks-category">
+                        <div class="code-block" draggable="true" data-block-type="variable">var = 0</div>
+                        <div class="code-block" draggable="true" data-block-type="string">text = ""</div>
+                    </div>
+                </div>
+
+                <div class="block-category">
+                    <div class="block-category-title">Logic</div>
+                    <div class="code-blocks-category">
+                        <div class="code-block" draggable="true" data-block-type="if">if ...</div>
+                        <div class="code-block" draggable="true" data-block-type="loop">for i in ...</div>
+                    </div>
+                </div>
+
+                <div class="block-category">
+                    <div class="block-category-title">Events</div>
+                    <div class="code-blocks-category">
+                        <div class="code-block" draggable="true" data-block-type="onclick">onClick</div>
+                        <div class="code-block" draggable="true" data-block-type="onchange">onChange</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-buttons">
+                <button id="previewBtn">Preview</button>
+                <button id="exportBtn">Export as HTML</button>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div id="frontTabContent" class="tab-content active">
+                <div class="canvas" id="canvas"></div>
+            </div>
+
+            <div id="backTabContent" class="tab-content back-tab">
+                <div class="code-workspace" id="codeWorkspace"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="preview-modal" id="previewModal">
+        <div class="preview-content">
+            <div class="preview-header">
+                <span>Preview</span>
+                <button id="closePreview">Close</button>
+            </div>
+            <iframe class="preview-iframe" id="previewIframe"></iframe>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="settings-modal" id="settingsModal">
+        <div class="settings-content">
+            <div class="settings-header">
+                ⚙️ Settings
+                <button id="closeSettings">✕</button>
+            </div>
+            <div class="settings-body">
+                <div class="settings-group">
+                    <div class="settings-group-title">Appearance</div>
+                    
+                    <div class="setting-item">
+                        <span class="setting-label">Dark Mode</span>
+                        <label class="switch">
+                            <input type="checkbox" id="darkModeToggle">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="setting-item">
+                        <span class="setting-label">Poipole Mode~</span>
+                        <label class="switch">
+                            <input type="checkbox" id="poipoleToggle">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="settings-group">
+                    <div class="settings-group-title">Sound Settings</div>
+                    
+                    <div class="setting-item">
+                        <span class="setting-label">Master Volume</span>
+                    </div>
+                    <input type="range" id="masterVolume" class="volume-slider" min="0" max="100" value="50">
+                    <div class="volume-display" id="masterVolumeDisplay">50%</div>
+
+                    <div class="setting-item" style="margin-top: 15px;">
+                        <span class="setting-label">UI Sound Volume</span>
+                    </div>
+                    <input type="range" id="uiVolume" class="volume-slider" min="0" max="100" value="50">
+                    <div class="volume-display" id="uiVolumeDisplay">50%</div>
+
+                    <button class="test-btn" id="testSoundBtn">🔊 Test Sound</button>
+                </div>
+
+                <div class="settings-group">
+                    <div class="settings-group-title">Links</div>
+                    <a href="https://github.com/pug-san/Minimake" target="_blank" class="repo-link">🔗 Visit Minimake Repo</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const state = {
+            frontElements: [],
+            backElements: [],
+            selectedElement: null,
+            selectedCode: null,
+            currentTab: 'front',
+            draggedElement: null,
+            draggedCode: null,
+            draggingCodeId: null,
+            dragOffsetX: 0,
+            dragOffsetY: 0,
+            draggingFrontId: null,
+            dragOffsetFrontX: 0,
+            dragOffsetFrontY: 0,
+            activeMenuCloseListener: null,
+            darkMode: localStorage.getItem('darkMode') === 'true',
+            poipoleMode: localStorage.getItem('poipoleMode') === 'true',
+            masterVolume: parseInt(localStorage.getItem('masterVolume')) || 50,
+            uiVolume: parseInt(localStorage.getItem('uiVolume')) || 50
+        };
+
+        const elementDefaults = {
+            button: { text: 'Click me', onClick: '' },
+            text: { text: 'Sample text', style: '' },
+            input: { placeholder: 'Enter text', value: '' },
+            progress: { value: 50, max: 100 },
+            checkbox: { text: 'Check me', checked: false },
+            heading: { text: 'Heading', level: 1 }
+        };
+
+        const codeBlockDefaults = {
+            variable: { name: 'myVar', value: '0' },
+            string: { name: 'myText', value: '""' },
+            if: { condition: 'x > 5', then: '' },
+            loop: { variable: 'i', start: '0', end: '10' },
+            onclick: { action: '' },
+            onchange: { action: '' }
+        };
+
+        // Apply theme on load
+        function applyTheme() {
+            if (state.darkMode) {
+                document.body.classList.add('dark-mode');
+            } else {
+                document.body.classList.remove('dark-mode');
+            }
+            
+            if (state.poipoleMode) {
+                document.body.classList.add('poipole');
+            } else {
+                document.body.classList.remove('poipole');
+            }
+        }
+
+        // Initialize theme on page load
+        applyTheme();
+        document.getElementById('darkModeToggle').checked = state.darkMode;
+        document.getElementById('poipoleToggle').checked = state.poipoleMode;
+        document.getElementById('masterVolume').value = state.masterVolume;
+        document.getElementById('uiVolume').value = state.uiVolume;
+
+        // Theme toggle listeners
+        document.getElementById('darkModeToggle').addEventListener('change', (e) => {
+            state.darkMode = e.target.checked;
+            localStorage.setItem('darkMode', state.darkMode);
+            applyTheme();
+            playSound('click');
+        });
+
+        document.getElementById('poipoleToggle').addEventListener('change', (e) => {
+            state.poipoleMode = e.target.checked;
+            localStorage.setItem('poipoleMode', state.poipoleMode);
+            applyTheme();
+            playSound('click');
+        });
+
+        // Volume sliders
+        document.getElementById('masterVolume').addEventListener('input', (e) => {
+            state.masterVolume = parseInt(e.target.value);
+            localStorage.setItem('masterVolume', state.masterVolume);
+            document.getElementById('masterVolumeDisplay').textContent = state.masterVolume + '%';
+        });
+
+        document.getElementById('uiVolume').addEventListener('input', (e) => {
+            state.uiVolume = parseInt(e.target.value);
+            localStorage.setItem('uiVolume', state.uiVolume);
+            document.getElementById('uiVolumeDisplay').textContent = state.uiVolume + '%';
+        });
+
+        // Test sound button
+        document.getElementById('testSoundBtn').addEventListener('click', () => {
+            playSound('success');
+        });
+
+        // Settings modal
+        document.getElementById('settingsBtn').addEventListener('click', () => {
+            document.getElementById('settingsModal').classList.add('active');
+            playSound('click');
+        });
+
+        document.getElementById('closeSettings').addEventListener('click', () => {
+            document.getElementById('settingsModal').classList.remove('active');
+            playSound('click');
+        });
+
+        document.getElementById('settingsModal').addEventListener('click', (e) => {
+            if (e.target.id === 'settingsModal') {
+                document.getElementById('settingsModal').classList.remove('active');
+            }
+        });
+
+        // Sound system using Web Audio API
+        function playSound(type) {
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const masterGain = audioContext.createGain();
+            const uiGain = audioContext.createGain();
+
+            masterGain.connect(audioContext.destination);
+            uiGain.connect(masterGain);
+
+            masterGain.gain.value = state.masterVolume / 100;
+            uiGain.gain.value = state.uiVolume / 100;
+
+            const oscillator = audioContext.createOscillator();
+            const envelope = audioContext.createGain();
+
+            oscillator.connect(envelope);
+            envelope.connect(uiGain);
+
+            switch (type) {
+                case 'click':
+                    oscillator.frequency.value = 800;
+                    envelope.gain.setValueAtTime(0.3, audioContext.currentTime);
+                    envelope.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+                    oscillator.start(audioContext.currentTime);
+                    oscillator.stop(audioContext.currentTime + 0.1);
+                    break;
+                case 'success':
+                    oscillator.frequency.setValueAtTime(400, audioContext.currentTime);
+                    oscillator.frequency.exponentialRampToValueAtTime(800, audioContext.currentTime + 0.15);
+                    envelope.gain.setValueAtTime(0.3, audioContext.currentTime);
+                    envelope.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.15);
+                    oscillator.start(audioContext.currentTime);
+                    oscillator.stop(audioContext.currentTime + 0.15);
+                    break;
+                case 'delete':
+                    oscillator.frequency.value = 300;
+                    envelope.gain.setValueAtTime(0.3, audioContext.currentTime);
+                    envelope.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.15);
+                    oscillator.start(audioContext.currentTime);
+                    oscillator.stop(audioContext.currentTime + 0.15);
+                    break;
+            }
+        }
+
+        // Helper function to close all open menus
+        function closeAllMenus() {
+            document.querySelectorAll('.editor-menu').forEach(m => m.remove());
+            if (state.activeMenuCloseListener) {
+                document.removeEventListener('click', state.activeMenuCloseListener);
+                state.activeMenuCloseListener = null;
+            }
+        }
+
+        // Tab switching
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                
+                state.currentTab = e.target.dataset.tab;
+                
+                const frontTab = document.getElementById('frontTabContent');
+                const backTab = document.getElementById('backTabContent');
+                
+                if (state.currentTab === 'front') {
+                    frontTab.classList.add('active');
+                    backTab.classList.remove('active');
+                    document.getElementById('elementsList').parentElement.style.display = 'block';
+                    document.getElementById('backTab').style.display = 'none';
+                    document.getElementById('sidebarTitle').textContent = 'Elements';
+                } else {
+                    frontTab.classList.remove('active');
+                    backTab.classList.add('active');
+                    document.getElementById('elementsList').parentElement.style.display = 'none';
+                    document.getElementById('backTab').style.display = 'block';
+                    document.getElementById('sidebarTitle').textContent = 'Code Blocks';
+                }
+                playSound('click');
+            });
+        });
+
+        // Front tab element dragging from sidebar
+        document.getElementById('elementsList').addEventListener('dragstart', (e) => {
+            if (e.target.classList.contains('element-item')) {
+                state.draggedElement = e.target.dataset.type;
+                e.dataTransfer.effectAllowed = 'copy';
+            }
+        });
+
+        // Back tab code block dragging from sidebar
+        document.addEventListener('dragstart', (e) => {
+            if (e.target.classList.contains('code-block')) {
+                state.draggedCode = e.target.dataset.blockType;
+                e.dataTransfer.effectAllowed = 'copy';
+            }
+        });
+
+        // Canvas drop
+        const canvas = document.getElementById('canvas');
+        canvas.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'copy';
+        });
+
+        canvas.addEventListener('drop', (e) => {
+            e.preventDefault();
+            if (state.draggedElement) {
+                const rect = canvas.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const id = Date.now();
+                const defaults = elementDefaults[state.draggedElement];
+                const element = {
+                    id,
+                    type: state.draggedElement,
+                    x,
+                    y,
+                    ...JSON.parse(JSON.stringify(defaults))
+                };
+
+                state.frontElements.push(element);
+                renderFrontElements();
+                state.draggedElement = null;
+                playSound('success');
+            }
+        });
+
+        // Code workspace drop
+        const codeWorkspace = document.getElementById('codeWorkspace');
+        codeWorkspace.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'copy';
+        });
+
+        codeWorkspace.addEventListener('drop', (e) => {
+            e.preventDefault();
+            if (state.draggedCode) {
+                const rect = codeWorkspace.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const id = Date.now();
+                const defaults = codeBlockDefaults[state.draggedCode];
+                const element = {
+                    id,
+                    type: state.draggedCode,
+                    x,
+                    y,
+                    ...JSON.parse(JSON.stringify(defaults))
+                };
+
+                state.backElements.push(element);
+                renderBackElements();
+                state.draggedCode = null;
+                playSound('success');
+            }
+        });
+
+        function renderFrontElements() {
+            canvas.querySelectorAll('.canvas-item').forEach(el => el.remove());
+
+            const sortedElements = [...state.frontElements].sort((a, b) => {
+                if (Math.abs(a.y - b.y) < 50) return a.x - b.x;
+                return a.y - b.y;
+            });
+
+            sortedElements.forEach(elem => {
+                const el = document.createElement('div');
+                el.className = 'canvas-item';
+                el.dataset.id = elem.id;
+                el.style.left = elem.x + 'px';
+                el.style.top = elem.y + 'px';
+
+                let content = '';
+                switch (elem.type) {
+                    case 'button':
+                        content = `<button style="cursor: pointer; padding: 6px 12px; pointer-events: none;">${elem.text}</button>`;
+                        break;
+                    case 'text':
+                        content = elem.text;
+                        break;
+                    case 'input':
+                        content = `<input type="text" placeholder="${elem.placeholder}" style="padding: 6px; pointer-events: none;">`;
+                        break;
+                    case 'progress':
+                        content = `<progress value="${elem.value}" max="${elem.max}" style="width: 100%;"></progress>`;
+                        break;
+                    case 'checkbox':
+                        content = `<input type="checkbox" style="pointer-events: none;"> ${elem.text}`;
+                        break;
+                    case 'heading':
+                        content = `<h${elem.level}>${elem.text}</h${elem.level}>`;
+                        break;
+                }
+
+                el.innerHTML = content;
+
+                el.addEventListener('mousedown', (e) => {
+                    const rect = canvas.getBoundingClientRect();
+                    state.draggingFrontId = elem.id;
+                    state.dragOffsetFrontX = e.clientX - rect.left - elem.x;
+                    state.dragOffsetFrontY = e.clientY - rect.top - elem.y;
+                    el.classList.add('selected');
+                    state.selectedElement = elem.id;
+                });
+
+                el.addEventListener('contextmenu', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    closeAllMenus();
+                    openEditorMenu(elem, e);
+                });
+
+                el.addEventListener('dblclick', (e) => {
+                    e.stopPropagation();
+                    closeAllMenus();
+                    openEditorMenu(elem, e);
+                });
+
+                canvas.appendChild(el);
+            });
+        }
+
+        function renderBackElements() {
+            codeWorkspace.querySelectorAll('.code-item').forEach(el => el.remove());
+
+            const sortedElements = [...state.backElements].sort((a, b) => {
+                return a.y - b.y;
+            });
+
+            sortedElements.forEach(elem => {
+                const el = document.createElement('div');
+                el.className = 'code-item';
+                el.dataset.id = elem.id;
+                el.style.left = elem.x + 'px';
+                el.style.top = elem.y + 'px';
+
+                let content = '';
+                switch (elem.type) {
+                    case 'variable':
+                        content = `${elem.name} = ${elem.value}`;
+                        break;
+                    case 'string':
+                        content = `${elem.name} = ${elem.value}`;
+                        break;
+                    case 'if':
+                        content = `if (${elem.condition})`;
+                        break;
+                    case 'loop':
+                        content = `for ${elem.variable} in range(${elem.start}, ${elem.end})`;
+                        break;
+                    case 'onclick':
+                        content = `onClick: ${elem.action || '...'}`;
+                        break;
+                    case 'onchange':
+                        content = `onChange: ${elem.action || '...'}`;
+                        break;
+                }
+
+                el.textContent = content;
+
+                el.addEventListener('mousedown', (e) => {
+                    const rect = codeWorkspace.getBoundingClientRect();
+                    state.draggingCodeId = elem.id;
+                    state.dragOffsetX = e.clientX - rect.left - elem.x;
+                    state.dragOffsetY = e.clientY - rect.top - elem.y;
+                    el.classList.add('selected');
+                    state.selectedCode = elem.id;
+                });
+
+                el.addEventListener('contextmenu', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    closeAllMenus();
+                    openCodeBlockEditor(elem, e);
+                });
+
+                el.addEventListener('dblclick', (e) => {
+                    e.stopPropagation();
+                    closeAllMenus();
+                    openCodeBlockEditor(elem, e);
+                });
+
+                codeWorkspace.appendChild(el);
+            });
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            if (state.draggingFrontId) {
+                const elem = state.frontElements.find(el => el.id === state.draggingFrontId);
+                if (elem) {
+                    const rect = canvas.getBoundingClientRect();
+                    elem.x = e.clientX - rect.left - state.dragOffsetFrontX;
+                    elem.y = e.clientY - rect.top - state.dragOffsetFrontY;
+
+                    const el = canvas.querySelector(`[data-id="${elem.id}"]`);
+                    if (el) {
+                        el.style.left = elem.x + 'px';
+                        el.style.top = elem.y + 'px';
+                    }
+                }
+            }
+
+            if (state.draggingCodeId) {
+                const elem = state.backElements.find(el => el.id === state.draggingCodeId);
+                if (elem) {
+                    const rect = codeWorkspace.getBoundingClientRect();
+                    elem.x = e.clientX - rect.left - state.dragOffsetX;
+                    elem.y = e.clientY - rect.top - state.dragOffsetY;
+
+                    const el = codeWorkspace.querySelector(`[data-id="${elem.id}"]`);
+                    if (el) {
+                        el.style.left = elem.x + 'px';
+                        el.style.top = elem.y + 'px';
+                    }
+                }
+            }
+        });
+
+        document.addEventListener('mouseup', () => {
+            if (state.draggingFrontId) {
+                state.draggingFrontId = null;
+                renderFrontElements();
+            }
+            if (state.draggingCodeId) {
+                const elem = state.backElements.find(el => el.id === state.draggingCodeId);
+                if (elem) {
+                    const rect = codeWorkspace.getBoundingClientRect();
+                    if (elem.x < rect.left || elem.x > rect.width || elem.y < rect.top || elem.y > rect.height) {
+                        deleteCodeBlock(elem.id);
+                    }
+                }
+                state.draggingCodeId = null;
+                renderBackElements();
+            }
+        });
+
+        function openEditorMenu(elem, e) {
+            const menu = document.createElement('div');
+            menu.className = 'editor-menu';
+            menu.style.left = e.clientX + 'px';
+            menu.style.top = e.clientY + 'px';
+
+            let html = '';
+
+            switch (elem.type) {
+                case 'button':
+                    html = `
+                        <label>Button Text:</label>
+                        <input type="text" id="btnText" value="${elem.text}">
+                        <label>On Click Action:</label>
+                        <input type="text" id="btnAction" placeholder="e.g., alert('Clicked!')">
+                    `;
+                    break;
+                case 'text':
+                    html = `
+                        <label>Text Content:</label>
+                        <input type="text" id="textContent" value="${elem.text}">
+                    `;
+                    break;
+                case 'input':
+                    html = `
+                        <label>Placeholder:</label>
+                        <input type="text" id="inputPlaceholder" value="${elem.placeholder}">
+                    `;
+                    break;
+                case 'progress':
+                    html = `
+                        <label>Current Value:</label>
+                        <input type="number" id="progressValue" value="${elem.value}">
+                        <label>Max Value:</label>
+                        <input type="number" id="progressMax" value="${elem.max}">
+                    `;
+                    break;
+                case 'checkbox':
+                    html = `
+                        <label>Label:</label>
+                        <input type="text" id="checkboxText" value="${elem.text}">
+                    `;
+                    break;
+                case 'heading':
+                    html = `
+                        <label>Heading Text:</label>
+                        <input type="text" id="headingText" value="${elem.text}">
+                        <label>Heading Level:</label>
+                        <select id="headingLevel">
+                            <option value="1" ${elem.level === 1 ? 'selected' : ''}>H1</option>
+                            <option value="2" ${elem.level === 2 ? 'selected' : ''}>H2</option>
+                            <option value="3" ${elem.level === 3 ? 'selected' : ''}>H3</option>
+                        </select>
+                    `;
+                    break;
+            }
+
+            menu.innerHTML = html + `
+                <button onclick="saveElementEdit(${elem.id})">Save</button>
+                <div class="delete-btn" onclick="deleteElement(${elem.id})">🗑 Remove</div>
+            `;
+
+            document.body.appendChild(menu);
+
+            menu.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+
+            const closeMenuListener = (e) => {
+                if (!menu.contains(e.target)) {
+                    closeAllMenus();
+                }
+            };
+
+            state.activeMenuCloseListener = closeMenuListener;
+            document.addEventListener('click', closeMenuListener);
+        }
+
+        function openCodeBlockEditor(elem, e) {
+            const menu = document.createElement('div');
+            menu.className = 'editor-menu';
+            menu.style.left = e.clientX + 'px';
+            menu.style.top = e.clientY + 'px';
+
+            let html = '';
+
+            switch (elem.type) {
+                case 'variable':
+                    html = `
+                        <label>Variable Name:</label>
+                        <input type="text" id="varName" value="${elem.name}">
+                        <label>Value:</label>
+                        <input type="text" id="varValue" value="${elem.value}">
+                    `;
+                    break;
+                case 'string':
+                    html = `
+                        <label>Variable Name:</label>
+                        <input type="text" id="strName" value="${elem.name}">
+                        <label>Value:</label>
+                        <input type="text" id="strValue" value="${elem.value}">
+                    `;
+                    break;
+                case 'if':
+                    html = `
+                        <label>Condition:</label>
+                        <input type="text" id="ifCondition" value="${elem.condition}">
+                    `;
+                    break;
+                case 'loop':
+                    html = `
+                        <label>Variable:</label>
+                        <input type="text" id="loopVar" value="${elem.variable}">
+                        <label>Start:</label>
+                        <input type="number" id="loopStart" value="${elem.start}">
+                        <label>End:</label>
+                        <input type="number" id="loopEnd" value="${elem.end}">
+                    `;
+                    break;
+                case 'onclick':
+                case 'onchange':
+                    html = `
+                        <label>Action:</label>
+                        <input type="text" id="eventAction" value="${elem.action}">
+                    `;
+                    break;
+            }
+
+            menu.innerHTML = html + `
+                <button onclick="saveCodeBlockEdit(${elem.id})">Save</button>
+                <div class="delete-btn" onclick="deleteCodeBlock(${elem.id})">🗑 Remove</div>
+            `;
+
+            document.body.appendChild(menu);
+
+            menu.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+
+            const closeMenuListener = (e) => {
+                if (!menu.contains(e.target)) {
+                    closeAllMenus();
+                }
+            };
+
+            state.activeMenuCloseListener = closeMenuListener;
+            document.addEventListener('click', closeMenuListener);
+        }
+
+        window.saveElementEdit = function(id) {
+            const elem = state.frontElements.find(e => e.id === id);
+            if (!elem) return;
+
+            switch (elem.type) {
+                case 'button':
+                    elem.text = document.getElementById('btnText').value;
+                    elem.onClick = document.getElementById('btnAction').value;
+                    break;
+                case 'text':
+                    elem.text = document.getElementById('textContent').value;
+                    break;
+                case 'input':
+                    elem.placeholder = document.getElementById('inputPlaceholder').value;
+                    break;
+                case 'progress':
+                    elem.value = parseInt(document.getElementById('progressValue').value);
+                    elem.max = parseInt(document.getElementById('progressMax').value);
+                    break;
+                case 'checkbox':
+                    elem.text = document.getElementById('checkboxText').value;
+                    break;
+                case 'heading':
+                    elem.text = document.getElementById('headingText').value;
+                    elem.level = parseInt(document.getElementById('headingLevel').value);
+                    break;
+            }
+
+            closeAllMenus();
+            renderFrontElements();
+            playSound('success');
+        };
+
+        window.saveCodeBlockEdit = function(id) {
+            const elem = state.backElements.find(e => e.id === id);
+            if (!elem) return;
+
+            switch (elem.type) {
+                case 'variable':
+                    elem.name = document.getElementById('varName').value;
+                    elem.value = document.getElementById('varValue').value;
+                    break;
+                case 'string':
+                    elem.name = document.getElementById('strName').value;
+                    elem.value = document.getElementById('strValue').value;
+                    break;
+                case 'if':
+                    elem.condition = document.getElementById('ifCondition').value;
+                    break;
+                case 'loop':
+                    elem.variable = document.getElementById('loopVar').value;
+                    elem.start = document.getElementById('loopStart').value;
+                    elem.end = document.getElementById('loopEnd').value;
+                    break;
+                case 'onclick':
+                case 'onchange':
+                    elem.action = document.getElementById('eventAction').value;
+                    break;
+            }
+
+            closeAllMenus();
+            renderBackElements();
+            playSound('success');
+        };
+
+        window.deleteElement = function(id) {
+            state.frontElements = state.frontElements.filter(e => e.id !== id);
+            closeAllMenus();
+            renderFrontElements();
+            playSound('delete');
+        };
+
+        window.deleteCodeBlock = function(id) {
+            state.backElements = state.backElements.filter(e => e.id !== id);
+            closeAllMenus();
+            renderBackElements();
+            playSound('delete');
+        };
+
+        function getVariables() {
+            const vars = {};
+            state.backElements.forEach(elem => {
+                if (elem.type === 'variable' || elem.type === 'string') {
+                    vars[elem.name] = elem.value;
+                }
+            });
+            return vars;
+        }
+
+        function interpolateVariables(text, variables) {
+            let result = text;
+            Object.keys(variables).forEach(varName => {
+                const regex = new RegExp(`\\[${varName}\\]`, 'g');
+                result = result.replace(regex, variables[varName]);
+            });
+            return result;
+        }
+
+        document.getElementById('previewBtn').addEventListener('click', () => {
+            const html = generatePreviewHTML();
+            const previewIframe = document.getElementById('previewIframe');
+            previewIframe.srcdoc = html;
+            document.getElementById('previewModal').classList.add('active');
+            playSound('click');
+        });
+
+        document.getElementById('closePreview').addEventListener('click', () => {
+            document.getElementById('previewModal').classList.remove('active');
+            playSound('click');
+        });
+
+        function generatePreviewHTML() {
+            const variables = getVariables();
+            const sortedElements = [...state.frontElements].sort((a, b) => {
+                if (Math.abs(a.y - b.y) < 50) return a.x - b.x;
+                return a.y - b.y;
+            });
+
+            let bodyContent = '';
+
+            sortedElements.forEach(elem => {
+                switch (elem.type) {
+                    case 'button':
+                        const onClickAttr = elem.onClick ? ` onclick="${elem.onClick}"` : '';
+                        bodyContent += `<button style="cursor: pointer; padding: 6px 12px; margin: 8px;"${onClickAttr}>${interpolateVariables(elem.text, variables)}</button><br>`;
+                        break;
+                    case 'text':
+                        bodyContent += `<p style="margin: 8px;">${interpolateVariables(elem.text, variables)}</p>`;
+                        break;
+                    case 'input':
+                        bodyContent += `<input type="text" placeholder="${interpolateVariables(elem.placeholder, variables)}" style="padding: 6px; margin: 8px;"><br>`;
+                        break;
+                    case 'progress':
+                        bodyContent += `<progress value="${elem.value}" max="${elem.max}" style="width: 200px; margin: 8px;"></progress><br>`;
+                        break;
+                    case 'checkbox':
+                        bodyContent += `<div style="margin: 8px;"><input type="checkbox"> ${interpolateVariables(elem.text, variables)}</div>`;
+                        break;
+                    case 'heading':
+                        bodyContent += `<h${elem.level}>${interpolateVariables(elem.text, variables)}</h${elem.level}>`;
+                        break;
+                }
+            });
+
+            return `
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <meta charset="UTF-8">
+                    <title>Preview</title>
+                    <style>
+                        body { font-family: system-ui, -apple-system, sans-serif; margin: 20px; }
+                    </style>
+                </head>
+                <body>
+                    ${bodyContent}
+                </body>
+                </html>
+            `;
+        }
+
+        document.getElementById('exportBtn').addEventListener('click', () => {
+            const html = generatePreviewHTML();
+            const blob = new Blob([html], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'website.html';
+            a.click();
+            URL.revokeObjectURL(url);
+            playSound('success');
+        });
+
+        canvas.addEventListener('click', (e) => {
+            if (e.target === canvas) {
+                state.selectedElement = null;
+                document.querySelectorAll('.canvas-item.selected').forEach(el => el.classList.remove('selected'));
+            }
+        });
+
+        codeWorkspace.addEventListener('click', (e) => {
+            if (e.target === codeWorkspace) {
+                state.selectedCode = null;
+                document.querySelectorAll('.code-item.selected').forEach(el => el.classList.remove('selected'));
+            }
+        });
+
+        renderFrontElements();
+        renderBackElements();
+    </script>
+</body>
+</html>
