@@ -1,0 +1,234 @@
+{
+  "frontElements": [
+    {
+      "id": 1777763050837,
+      "type": "button",
+      "x": 20,
+      "y": 180,
+      "text": "Click me",
+      "name": "button1"
+    },
+    {
+      "id": 1777763053772,
+      "type": "text",
+      "x": 20,
+      "y": 20,
+      "text": "Bad Guy Befriender!",
+      "tag": "h1"
+    },
+    {
+      "id": 1777763072377,
+      "type": "text",
+      "x": 20,
+      "y": 100,
+      "text": "You have befriended [baddies] bag guys!",
+      "tag": "p"
+    },
+    {
+      "id": 1777765523553,
+      "type": "progress",
+      "x": 20,
+      "y": 160,
+      "value": "[hp]",
+      "max": "[maxhp]",
+      "width": "200",
+      "height": ""
+    },
+    {
+      "id": 1777765740717,
+      "type": "text",
+      "x": 20,
+      "y": 140,
+      "text": "hp: [hp]",
+      "tag": "p"
+    },
+    {
+      "id": 1777779713199,
+      "type": "button",
+      "x": 20,
+      "y": 440,
+      "text": "Reduced health: [RHUpgradePrice]",
+      "name": "1",
+      "width": "",
+      "height": ""
+    },
+    {
+      "id": 1777779730262,
+      "type": "button",
+      "x": 560,
+      "y": 440,
+      "text": "Click me",
+      "name": "button1",
+      "width": "",
+      "height": ""
+    }
+  ],
+  "backElements": [
+    {
+      "id": 1777763109285,
+      "type": "variable",
+      "x": 180,
+      "y": 140,
+      "parentId": null,
+      "name": "baddies",
+      "value": "0"
+    },
+    {
+      "id": 1777765596065,
+      "type": "onclick",
+      "x": 180,
+      "y": 200,
+      "parentId": null,
+      "buttonName": "button1",
+      "action": "hp--"
+    },
+    {
+      "id": 1777765671612,
+      "type": "variable",
+      "x": 180,
+      "y": 80,
+      "parentId": null,
+      "name": "hp",
+      "value": "10"
+    },
+    {
+      "id": 1777767221726,
+      "type": "if",
+      "x": 180,
+      "y": 260,
+      "parentId": null,
+      "condition": "hp < 1",
+      "then": ""
+    },
+    {
+      "id": 1777767226604,
+      "type": "onclick",
+      "x": 0,
+      "y": 0,
+      "parentId": 1777767221726,
+      "buttonName": "button1",
+      "action": "baddies++"
+    },
+    {
+      "id": 1777767465494,
+      "type": "onclick",
+      "x": 200,
+      "y": 380,
+      "parentId": 1777767221726,
+      "buttonName": "button1",
+      "action": "hp = maxhp"
+    },
+    {
+      "id": 1777779905358,
+      "type": "variable",
+      "x": 180,
+      "y": 20,
+      "parentId": null,
+      "name": "maxhp",
+      "value": "10"
+    },
+    {
+      "id": 1777780080846,
+      "type": "variable",
+      "x": 300,
+      "y": 20,
+      "parentId": null,
+      "name": "RHUpgradePrice",
+      "value": "10"
+    },
+    {
+      "id": 1777780173049,
+      "type": "onclick",
+      "x": 460,
+      "y": 500,
+      "parentId": null,
+      "buttonName": "",
+      "action": ""
+    },
+    {
+      "id": 1777780181865,
+      "type": "onclick",
+      "x": 540,
+      "y": 300,
+      "parentId": 1777780145189,
+      "buttonName": "1",
+      "action": "hp = maxhp"
+    },
+    {
+      "id": 1777780467611,
+      "type": "if",
+      "x": 520,
+      "y": 40,
+      "parentId": null,
+      "condition": "maxhp > 1",
+      "then": ""
+    },
+    {
+      "id": 1777780708467,
+      "type": "if",
+      "x": 800,
+      "y": 420,
+      "parentId": 1777780467611,
+      "condition": "baddies >= RHUpgradePrice",
+      "then": ""
+    },
+    {
+      "id": 1777779953260,
+      "type": "onclick",
+      "x": 800,
+      "y": 460,
+      "parentId": 1777780708467,
+      "buttonName": "1",
+      "action": "maxhp--"
+    },
+    {
+      "id": 1777780878837,
+      "type": "onclick",
+      "x": 640,
+      "y": 160,
+      "parentId": 1777780708467,
+      "buttonName": "1",
+      "action": "baddies -= RHUpgradePrice"
+    },
+    {
+      "id": 1777780003120,
+      "type": "onclick",
+      "x": 860,
+      "y": 540,
+      "parentId": 1777780708467,
+      "buttonName": "1",
+      "action": "RHUpgradePrice += 10"
+    },
+    {
+      "id": 1777780145189,
+      "type": "if",
+      "x": 820,
+      "y": 560,
+      "parentId": 1777780708467,
+      "condition": "hp > maxhp",
+      "then": ""
+    },
+    {
+      "id": 1777782038965,
+      "type": "variable",
+      "x": 60,
+      "y": 340,
+      "parentId": null,
+      "name": "myVar",
+      "value": "0"
+    }
+  ],
+  "cssRules": [
+    {
+      "id": 1777763152413,
+      "selector": "body",
+      "fontSize": "",
+      "color": "",
+      "backgroundColor": "#ffffff",
+      "fontFamily": "",
+      "fontWeight": "",
+      "textAlign": "",
+      "backgroundImage": ""
+    }
+  ]
+}
