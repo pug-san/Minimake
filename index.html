@@ -619,6 +619,112 @@
             box-shadow: 0 0 0 3px rgba(212, 165, 255, 0.2);
         }
 
+        .code-container {
+            padding: 0;
+            min-width: 200px;
+        }
+
+        .code-header {
+            padding: 8px 12px;
+        }
+
+        .code-container > .code-header {
+            border-bottom: 1px dashed rgba(0, 102, 204, 0.4);
+            font-weight: bold;
+        }
+
+        .dark-mode .code-container > .code-header {
+            border-bottom-color: rgba(15, 168, 209, 0.4);
+        }
+
+        .poipole .code-container > .code-header {
+            border-bottom-color: rgba(157, 78, 221, 0.4);
+        }
+
+        .dark-mode.poipole .code-container > .code-header {
+            border-bottom-color: rgba(212, 165, 255, 0.4);
+        }
+
+        .code-children {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            padding: 12px;
+            min-height: 44px;
+            margin: 4px;
+            border: 1px dashed rgba(0, 102, 204, 0.3);
+            border-radius: 4px;
+            background: rgba(0, 102, 204, 0.04);
+        }
+
+        .dark-mode .code-children {
+            border-color: rgba(15, 168, 209, 0.3);
+            background: rgba(15, 168, 209, 0.05);
+        }
+
+        .poipole .code-children {
+            border-color: rgba(157, 78, 221, 0.3);
+            background: rgba(157, 78, 221, 0.05);
+        }
+
+        .dark-mode.poipole .code-children {
+            border-color: rgba(212, 165, 255, 0.3);
+            background: rgba(212, 165, 255, 0.05);
+        }
+
+        .code-children.drag-over {
+            background: rgba(0, 102, 204, 0.18);
+            border-style: solid;
+        }
+
+        .poipole .code-children.drag-over {
+            background: rgba(157, 78, 221, 0.2);
+        }
+
+        .code-children .code-item {
+            position: relative !important;
+            left: auto !important;
+            top: auto !important;
+        }
+
+        .code-drop-hint {
+            font-size: 11px;
+            font-style: italic;
+            opacity: 0.55;
+            text-align: center;
+            padding: 4px;
+            pointer-events: none;
+        }
+
+        .code-insert-indicator {
+            height: 3px;
+            background: #0066cc;
+            border-radius: 2px;
+            margin: 1px 0;
+            box-shadow: 0 0 6px rgba(0, 102, 204, 0.6);
+            pointer-events: none;
+        }
+
+        .dark-mode .code-insert-indicator {
+            background: #0fa8d1;
+            box-shadow: 0 0 6px rgba(15, 168, 209, 0.7);
+        }
+
+        .poipole .code-insert-indicator {
+            background: #9d4edd;
+            box-shadow: 0 0 6px rgba(157, 78, 221, 0.6);
+        }
+
+        .dark-mode.poipole .code-insert-indicator {
+            background: #d4a5ff;
+            box-shadow: 0 0 6px rgba(212, 165, 255, 0.7);
+        }
+
+        /* When showing an insertion line, fade the bottom hint to avoid double-cue */
+        .code-children.drag-over .code-drop-hint {
+            opacity: 0.25;
+        }
+
         .tab-content {
             display: none;
         }
@@ -1152,6 +1258,415 @@
             max-width: 100%;
             max-height: 100%;
         }
+
+        /* Snap-to-grid background pattern */
+        .canvas.snap-grid,
+        .code-workspace.snap-grid {
+            background-image:
+                linear-gradient(to right, rgba(0,0,0,0.06) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0,0,0,0.06) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        .dark-mode .canvas.snap-grid,
+        .dark-mode .code-workspace.snap-grid {
+            background-image:
+                linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px);
+        }
+
+        .poipole .canvas.snap-grid,
+        .poipole .code-workspace.snap-grid {
+            background-image:
+                linear-gradient(to right, rgba(157,78,221,0.12) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(157,78,221,0.12) 1px, transparent 1px);
+        }
+
+        .dark-mode.poipole .canvas.snap-grid,
+        .dark-mode.poipole .code-workspace.snap-grid {
+            background-image:
+                linear-gradient(to right, rgba(212,165,255,0.1) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(212,165,255,0.1) 1px, transparent 1px);
+        }
+
+        /* CSS tab styles */
+        .css-target-item {
+            padding: 8px 10px;
+            margin: 4px 0;
+            border: 1px solid #ccc;
+            background: #fff;
+            cursor: pointer;
+            font-size: 13px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+
+        .dark-mode .css-target-item {
+            border-color: #444;
+            background: #333;
+            color: #e0e0e0;
+        }
+
+        .poipole .css-target-item {
+            border-color: #d4a5ff;
+            background: #f8f0ff;
+            color: #4a2e6b;
+        }
+
+        .dark-mode.poipole .css-target-item {
+            border-color: #6b4c99;
+            background: #441a66;
+            color: #e0b3ff;
+        }
+
+        .css-target-item:hover {
+            background: #f0f0f0;
+        }
+
+        .dark-mode .css-target-item:hover {
+            background: #3a3a3a;
+        }
+
+        .poipole .css-target-item:hover {
+            background: #e6d4ff;
+        }
+
+        .dark-mode.poipole .css-target-item:hover {
+            background: #552d7a;
+        }
+
+        .css-workspace {
+            flex: 1;
+            overflow: auto;
+            padding: 16px;
+            background: #fafafa;
+        }
+
+        .dark-mode .css-workspace {
+            background: #1e1e1e;
+        }
+
+        .poipole .css-workspace {
+            background: #faf6ff;
+        }
+
+        .dark-mode.poipole .css-workspace {
+            background: #2a1a3a;
+        }
+
+        .css-rule {
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            padding: 14px;
+            margin-bottom: 14px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .dark-mode .css-rule {
+            background: #2a2a2a;
+            border-color: #444;
+            color: #e0e0e0;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .poipole .css-rule {
+            background: #f8f0ff;
+            border-color: #d4a5ff;
+        }
+
+        .dark-mode.poipole .css-rule {
+            background: #3a2847;
+            border-color: #6b4c99;
+            color: #e0b3ff;
+        }
+
+        .css-rule-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .dark-mode .css-rule-header {
+            border-bottom-color: #444;
+        }
+
+        .poipole .css-rule-header {
+            border-bottom-color: #d4a5ff;
+        }
+
+        .dark-mode.poipole .css-rule-header {
+            border-bottom-color: #6b4c99;
+        }
+
+        .css-rule-selector {
+            font-family: monospace;
+            font-weight: bold;
+            font-size: 16px;
+            color: #0066cc;
+        }
+
+        .dark-mode .css-rule-selector {
+            color: #0fa8d1;
+        }
+
+        .poipole .css-rule-selector {
+            color: #9d4edd;
+        }
+
+        .dark-mode.poipole .css-rule-selector {
+            color: #d4a5ff;
+        }
+
+        .css-rule-delete {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            color: #d32f2f;
+            padding: 4px 8px;
+            border-radius: 3px;
+        }
+
+        .css-rule-delete:hover {
+            background: rgba(211, 47, 47, 0.1);
+        }
+
+        .dark-mode .css-rule-delete {
+            color: #ff6b6b;
+        }
+
+        .css-rule-fields {
+            display: grid;
+            gap: 10px;
+        }
+
+        .css-field {
+            display: grid;
+            grid-template-columns: 110px 1fr;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .css-field > label {
+            font-family: monospace;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .css-field input[type="text"],
+        .css-field select {
+            padding: 6px 8px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            font-size: 13px;
+            background: #fff;
+            color: #000;
+        }
+
+        .dark-mode .css-field input[type="text"],
+        .dark-mode .css-field select {
+            background: #333;
+            border-color: #444;
+            color: #e0e0e0;
+        }
+
+        .poipole .css-field input[type="text"],
+        .poipole .css-field select {
+            border-color: #d4a5ff;
+        }
+
+        .dark-mode.poipole .css-field input[type="text"],
+        .dark-mode.poipole .css-field select {
+            background: #441a66;
+            border-color: #6b4c99;
+            color: #e0b3ff;
+        }
+
+        .css-color-row {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .css-color-row input[type="color"] {
+            width: 40px;
+            height: 32px;
+            padding: 0;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            cursor: pointer;
+            background: #fff;
+        }
+
+        .css-color-row input[type="text"] {
+            flex: 1;
+            font-family: monospace;
+        }
+
+        .css-clear-btn {
+            padding: 4px 10px;
+            background: #f5f5f5;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+
+        .dark-mode .css-clear-btn {
+            background: #333;
+            border-color: #444;
+            color: #e0e0e0;
+        }
+
+        .poipole .css-clear-btn {
+            background: #f0e6ff;
+            border-color: #d4a5ff;
+            color: #4a2e6b;
+        }
+
+        .dark-mode.poipole .css-clear-btn {
+            background: #441a66;
+            border-color: #6b4c99;
+            color: #e0b3ff;
+        }
+
+        .css-empty-hint {
+            text-align: center;
+            color: #999;
+            padding: 40px 20px;
+            font-style: italic;
+            font-size: 13px;
+        }
+
+        .dark-mode .css-empty-hint {
+            color: #777;
+        }
+
+        .css-upload-btn {
+            padding: 6px 12px;
+            background: #fff;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 12px;
+            color: #000;
+            font-family: inherit;
+        }
+
+        .css-upload-btn:hover {
+            background: #f5f5f5;
+        }
+
+        .dark-mode .css-upload-btn {
+            background: #333;
+            border-color: #444;
+            color: #e0e0e0;
+        }
+
+        .dark-mode .css-upload-btn:hover {
+            background: #3a3a3a;
+        }
+
+        .poipole .css-upload-btn {
+            background: #f0e6ff;
+            border-color: #d4a5ff;
+            color: #4a2e6b;
+        }
+
+        .poipole .css-upload-btn:hover {
+            background: #e6d4ff;
+        }
+
+        .dark-mode.poipole .css-upload-btn {
+            background: #441a66;
+            border-color: #6b4c99;
+            color: #e0b3ff;
+        }
+
+        .dark-mode.poipole .css-upload-btn:hover {
+            background: #552d7a;
+        }
+
+        .css-img-preview {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        .dark-mode .css-img-preview {
+            border-color: #444;
+        }
+
+        .css-current-value {
+            flex: 1;
+            font-family: monospace;
+            font-size: 12px;
+            color: #666;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .dark-mode .css-current-value {
+            color: #999;
+        }
+
+        .css-current-value.css-none {
+            font-style: italic;
+            opacity: 0.6;
+        }
+
+        /* Marquee (rubber-band) selection rectangle */
+        .selection-rect {
+            position: absolute;
+            border: 1px dashed #0066cc;
+            background: rgba(0, 102, 204, 0.1);
+            pointer-events: none;
+            z-index: 1500;
+        }
+
+        .dark-mode .selection-rect {
+            border-color: #0fa8d1;
+            background: rgba(15, 168, 209, 0.12);
+        }
+
+        .poipole .selection-rect {
+            border-color: #9d4edd;
+            background: rgba(157, 78, 221, 0.12);
+        }
+
+        .dark-mode.poipole .selection-rect {
+            border-color: #d4a5ff;
+            background: rgba(212, 165, 255, 0.12);
+        }
+
+        /* Multi-selected state */
+        .canvas-item.multi-selected,
+        .code-item.multi-selected {
+            outline: 2px solid #0066cc;
+            outline-offset: 2px;
+        }
+
+        .dark-mode .canvas-item.multi-selected,
+        .dark-mode .code-item.multi-selected {
+            outline-color: #0fa8d1;
+        }
+
+        .poipole .canvas-item.multi-selected,
+        .poipole .code-item.multi-selected {
+            outline-color: #9d4edd;
+        }
+
+        .dark-mode.poipole .canvas-item.multi-selected,
+        .dark-mode.poipole .code-item.multi-selected {
+            outline-color: #d4a5ff;
+        }
     </style>
 </head>
 <body>
@@ -1159,6 +1674,7 @@
         <div class="tabs">
             <button class="tab-btn active" data-tab="front">Front</button>
             <button class="tab-btn" data-tab="back">Back</button>
+            <button class="tab-btn" data-tab="css">CSS</button>
         </div>
         <div class="header-right">
             <button class="help-btn" id="helpBtn">❓ Help</button>
@@ -1173,11 +1689,10 @@
             <div id="frontTab" class="tab-section">
                 <div class="elements-list" id="elementsList">
                     <div class="element-item" draggable="true" data-type="button">Button</div>
-                    <div class="element-item" draggable="true" data-type="text">Text</div>
+                    <div class="element-item" draggable="true" data-type="text">Text / Heading</div>
                     <div class="element-item" draggable="true" data-type="input">Input</div>
                     <div class="element-item" draggable="true" data-type="progress">Progress Bar</div>
                     <div class="element-item" draggable="true" data-type="checkbox">Checkbox</div>
-                    <div class="element-item" draggable="true" data-type="heading">Heading</div>
                     <div class="element-item" draggable="true" data-type="image">Image</div>
                 </div>
             </div>
@@ -1208,6 +1723,21 @@
                 </div>
             </div>
 
+            <div id="cssTab" class="tab-section" style="display: none; flex: 1; overflow-y: auto;">
+                <div class="elements-list">
+                    <div class="css-target-item" data-selector="body">+ body (page background)</div>
+                    <div class="css-target-item" data-selector="p">+ p (paragraph)</div>
+                    <div class="css-target-item" data-selector="h1">+ h1</div>
+                    <div class="css-target-item" data-selector="h2">+ h2</div>
+                    <div class="css-target-item" data-selector="h3">+ h3</div>
+                    <div class="css-target-item" data-selector="h4">+ h4</div>
+                    <div class="css-target-item" data-selector="h5">+ h5</div>
+                    <div class="css-target-item" data-selector="h6">+ h6</div>
+                    <div class="css-target-item" data-selector="button">+ button</div>
+                    <div class="css-target-item" data-selector="input">+ input</div>
+                </div>
+            </div>
+
             <div class="sidebar-buttons">
                 <button id="previewBtn">👁️ Preview</button>
                 <button id="exportBtn">💾 Export</button>
@@ -1223,13 +1753,17 @@
             <div id="backTabContent" class="tab-content back-tab">
                 <div class="code-workspace" id="codeWorkspace"></div>
             </div>
+
+            <div id="cssTabContent" class="tab-content back-tab">
+                <div class="css-workspace" id="cssWorkspace"></div>
+            </div>
         </div>
     </div>
 
     <div class="preview-modal" id="previewModal">
         <div class="preview-content">
             <div class="preview-header">
-                <span>Preview</span>
+                <span>Preview <span style="font-weight: normal; font-size: 12px; opacity: 0.7;">(live — updates as you edit)</span></span>
                 <button id="closePreview">✕</button>
             </div>
             <iframe class="preview-iframe" id="previewIframe"></iframe>
@@ -1248,12 +1782,12 @@
                 
                 <div class="help-item">
                     <div class="help-item-title">📦 Button</div>
-                    <div class="help-item-desc">A clickable button. Set the button text and give it a unique name (e.g., "submitBtn"). Use <span class="help-item-code">[varName]</span> for variables. Link actions using onClick blocks in the back tab.</div>
+                    <div class="help-item-desc">A clickable button. Set the button text and give it a unique name (e.g., "submitBtn"). Use <span class="help-item-code">[varName]</span> for variables. Set width/height in pixels to control size, or leave blank to fit the text. Link actions using onClick blocks in the back tab.</div>
                 </div>
 
                 <div class="help-item">
-                    <div class="help-item-title">📝 Text</div>
-                    <div class="help-item-desc">Display static or dynamic text. Use <span class="help-item-code">[varName]</span> to insert variable values from the back tab.</div>
+                    <div class="help-item-title">📝 Text / Heading</div>
+                    <div class="help-item-desc">Display text. Pick a tag from the dropdown — <span class="help-item-code">&lt;p&gt;</span> for paragraphs, <span class="help-item-code">&lt;h1&gt;</span> through <span class="help-item-code">&lt;h6&gt;</span> for headings. Use <span class="help-item-code">[varName]</span> to insert variables. Style any tag in the CSS tab.</div>
                 </div>
 
                 <div class="help-item">
@@ -1263,7 +1797,7 @@
 
                 <div class="help-item">
                     <div class="help-item-title">📊 Progress Bar</div>
-                    <div class="help-item-desc">Shows a progress bar. You can set the current value and max value. Use <span class="help-item-code">[varName]</span> for dynamic values!</div>
+                    <div class="help-item-desc">Shows a progress bar. Set the current value, max value, and width/height in pixels. Use <span class="help-item-code">[varName]</span> for dynamic values!</div>
                 </div>
 
                 <div class="help-item">
@@ -1272,13 +1806,8 @@
                 </div>
 
                 <div class="help-item">
-                    <div class="help-item-title">📌 Heading</div>
-                    <div class="help-item-desc">Heading text (H1, H2, H3). Use <span class="help-item-code">[varName]</span> to insert variables.</div>
-                </div>
-
-                <div class="help-item">
                     <div class="help-item-title">🖼️ Image</div>
-                    <div class="help-item-desc">Display an image. Paste the image URL and set the width and height. Use <span class="help-item-code">[varName]</span> for dynamic image URLs!</div>
+                    <div class="help-item-desc">Display an image. Double-click the placeholder on the canvas, then click <span class="help-item-code">📁 Choose File</span> to upload an image from your device. Set the width and height in pixels.</div>
                 </div>
 
                 <div class="settings-group-title" style="margin-top: 20px;">Back Elements (Variables & Events)</div>
@@ -1303,11 +1832,83 @@
                     <div class="help-item-desc">Link an action to a checkbox. Select the checkbox name from the dropdown and enter the action to perform when changed.</div>
                 </div>
 
+                <div class="help-item">
+                    <div class="help-item-title">🔗 Nesting blocks inside If / Loop</div>
+                    <div class="help-item-desc">Drag any block onto an <span class="help-item-code">if</span> or <span class="help-item-code">loop</span> block — the dotted area inside it is a drop zone. Drop between two existing children to insert there: a blue line shows where the new block will land. Drag a child out of the zone to detach it. Tip: drag slowly so you don't accidentally just open the editor.</div>
+                </div>
+
+                <div class="help-item">
+                    <div class="help-item-title">▶️ When if / loop blocks run</div>
+                    <div class="help-item-desc">A top-level <span class="help-item-code">if</span> is reactive — it runs when the preview loads <em>and</em> after every button click or checkbox change, so it automatically responds to variable updates. Example: <span class="help-item-code">if (hp &lt; 1) hp = 10</span> will reset hp every time something pushes it below 1. Top-level <span class="help-item-code">loop</span> blocks run once on load (avoiding surprise side effects). Want a loop to repeat? Put it inside an onClick handler.</div>
+                </div>
+
+                <div class="help-item">
+                    <div class="help-item-title">👁️ Live Preview</div>
+                    <div class="help-item-desc">Open the preview and leave it open — it auto-refreshes as you edit elements, blocks, and code.</div>
+                </div>
+
+                <div class="settings-group-title" style="margin-top: 20px;">CSS Tab</div>
+
+                <div class="help-item">
+                    <div class="help-item-title">🎨 Adding style rules</div>
+                    <div class="help-item-desc">Click any target in the sidebar (<span class="help-item-code">body</span>, <span class="help-item-code">p</span>, <span class="help-item-code">h1</span>–<span class="help-item-code">h6</span>, <span class="help-item-code">button</span>, <span class="help-item-code">input</span>) to add a rule for that selector. Each rule has font-size, color, font-family, font-weight, and text-align. Leave any field blank (or pick "(inherit)") to skip that property — only filled-in values are applied.</div>
+                </div>
+
+                <div class="help-item">
+                    <div class="help-item-title">🌈 Setting colors</div>
+                    <div class="help-item-desc">Use the color picker for a quick swatch, or type a value like <span class="help-item-code">#ff6699</span>, <span class="help-item-code">red</span>, or <span class="help-item-code">rgb(120, 80, 255)</span> in the text field. Click "clear" to remove the color.</div>
+                </div>
+
+                <div class="help-item">
+                    <div class="help-item-title">🖼️ Page background color</div>
+                    <div class="help-item-desc">Click <span class="help-item-code">+ body (page background)</span> in the CSS sidebar and pick a color in the <span class="help-item-code">background-color</span> row. The body rule only handles background — for text styling, add a rule for a specific selector like <span class="help-item-code">p</span>, <span class="help-item-code">h1</span>, etc.</div>
+                </div>
+
+                <div class="help-item">
+                    <div class="help-item-title">🌄 Background image</div>
+                    <div class="help-item-desc">In any CSS rule (e.g. <span class="help-item-code">+ body</span>), click <span class="help-item-code">📁 Choose File</span> in the <span class="help-item-code">background-image</span> row to upload an image from your device. It's automatically set to <span class="help-item-code">cover</span> + <span class="help-item-code">center</span> so it fills the area cleanly.</div>
+                </div>
+
+                <div class="help-item">
+                    <div class="help-item-title">🅰️ Heading levels h3 / h4 / h5 / h6</div>
+                    <div class="help-item-desc">All six heading levels are stylable from the CSS tab. Add a rule for each level you use and customize its font-size, weight, etc.</div>
+                </div>
+
                 <div class="settings-group-title" style="margin-top: 20px;">Features</div>
 
                 <div class="help-item">
                     <div class="help-item-title">📤 Variable Interpolation</div>
                     <div class="help-item-desc">In any front element, use <span class="help-item-code">[variableName]</span> to insert values from variables in the back tab. For example, if you have a variable "score" with value "42", use [score] to display it.</div>
+                </div>
+
+                <div class="help-item">
+                    <div class="help-item-title">🔁 Live variable updates</div>
+                    <div class="help-item-desc">Variables you create in the Back tab are real JavaScript variables in the preview. So an onClick action like <span class="help-item-code">counter++</span> works, and any element using <span class="help-item-code">[counter]</span> will refresh automatically right after the action runs. Use <span class="help-item-code">counter = 0</span> to reset, <span class="help-item-code">myText = "hi"</span> for strings, etc.</div>
+                </div>
+
+                <div class="help-item">
+                    <div class="help-item-title">📐 Drag positions = preview positions</div>
+                    <div class="help-item-desc">Where you place a block on the Front canvas is exactly where it appears in the preview. The preview is absolutely positioned, so your layout is preserved.</div>
+                </div>
+
+                <div class="help-item">
+                    <div class="help-item-title">▦ Snap to grid</div>
+                    <div class="help-item-desc">On by default. Toggle in Settings. When on, dragged elements snap to a 20px grid (visible as faint dots/lines on the canvas) so things line up cleanly.</div>
+                </div>
+
+                <div class="help-item">
+                    <div class="help-item-title">⬚ Drag to select</div>
+                    <div class="help-item-desc">Click and drag on empty canvas (or the back-tab background) to draw a selection rectangle. Anything it touches gets selected. <span class="help-item-code">Shift+click</span> an element to add/remove it from the selection. <span class="help-item-code">Shift+drag</span> on the background adds to the existing selection. <span class="help-item-code">Esc</span> clears selection.</div>
+                </div>
+
+                <div class="help-item">
+                    <div class="help-item-title">📋 Copy / paste / duplicate</div>
+                    <div class="help-item-desc">Select one or more items, then: <span class="help-item-code">Ctrl/⌘+C</span> copy, <span class="help-item-code">Ctrl/⌘+X</span> cut, <span class="help-item-code">Ctrl/⌘+V</span> paste, <span class="help-item-code">Ctrl/⌘+D</span> duplicate, <span class="help-item-code">Ctrl/⌘+A</span> select all, <span class="help-item-code">Delete</span>/<span class="help-item-code">Backspace</span> remove. Pasted items appear with a small offset. For if/loop blocks in the back tab, the entire nested subtree is copied together.</div>
+                </div>
+
+                <div class="help-item">
+                    <div class="help-item-title">🤝 Group move</div>
+                    <div class="help-item-desc">When multiple items are selected, dragging any one of them moves the whole group together — useful for repositioning a chunk of UI without re-selecting.</div>
                 </div>
 
                 <div class="help-item">
@@ -1349,6 +1950,14 @@
                             <span class="slider"></span>
                         </label>
                     </div>
+
+                    <div class="setting-item">
+                        <span class="setting-label">Snap to Grid (20px)</span>
+                        <label class="switch">
+                            <input type="checkbox" id="snapToGridToggle">
+                            <span class="slider"></span>
+                        </label>
+                    </div>
                 </div>
 
                 <div class="settings-group">
@@ -1383,8 +1992,13 @@
         const state = {
             frontElements: [],
             backElements: [],
+            cssRules: [],
             selectedElement: null,
             selectedCode: null,
+            selectedFrontIds: new Set(),
+            selectedBackIds: new Set(),
+            clipboard: null, // { kind: 'front'|'back', items: [...] }
+            marquee: null,   // { startX, startY, currentX, currentY, area: 'canvas'|'code', additive }
             currentTab: 'front',
             draggedElement: null,
             draggedCode: null,
@@ -1394,22 +2008,142 @@
             draggingFrontId: null,
             dragOffsetFrontX: 0,
             dragOffsetFrontY: 0,
+            dragStartClientX: 0,
+            dragStartClientY: 0,
+            hasDragged: false,
             activeMenuCloseListener: null,
             darkMode: localStorage.getItem('darkMode') === 'true',
             poipoleMode: localStorage.getItem('poipoleMode') === 'true',
+            snapToGrid: localStorage.getItem('snapToGrid') !== 'false',
             masterVolume: parseInt(localStorage.getItem('masterVolume')) || 50,
             uiVolume: parseInt(localStorage.getItem('uiVolume')) || 50
         };
 
+        const GRID_SIZE = 20;
+        function snap(v) {
+            return state.snapToGrid ? Math.round(v / GRID_SIZE) * GRID_SIZE : Math.round(v);
+        }
+
+        function applySnapGridVisuals() {
+            const c = document.getElementById('canvas');
+            const w = document.getElementById('codeWorkspace');
+            if (c) c.classList.toggle('snap-grid', state.snapToGrid);
+            if (w) w.classList.toggle('snap-grid', state.snapToGrid);
+        }
+
+        // Selection helpers — apply CSS .multi-selected to currently selected items
+        function refreshSelectionVisuals() {
+            document.querySelectorAll('.canvas-item.multi-selected').forEach(el => el.classList.remove('multi-selected'));
+            document.querySelectorAll('.code-item.multi-selected').forEach(el => el.classList.remove('multi-selected'));
+            state.selectedFrontIds.forEach(id => {
+                const el = document.querySelector(`.canvas-item[data-id="${id}"]`);
+                if (el) el.classList.add('multi-selected');
+            });
+            state.selectedBackIds.forEach(id => {
+                const el = document.querySelector(`.code-item[data-id="${id}"]`);
+                if (el) el.classList.add('multi-selected');
+            });
+        }
+
+        function clearAllSelections() {
+            state.selectedFrontIds.clear();
+            state.selectedBackIds.clear();
+            state.selectedElement = null;
+            state.selectedCode = null;
+            refreshSelectionVisuals();
+        }
+
+        function renderMarquee() {
+            const m = state.marquee;
+            if (!m) {
+                document.querySelectorAll('.selection-rect').forEach(r => r.remove());
+                return;
+            }
+            const container = m.area === 'canvas' ? canvas : codeWorkspace;
+            let rect = container.querySelector('.selection-rect');
+            if (!rect) {
+                rect = document.createElement('div');
+                rect.className = 'selection-rect';
+                container.appendChild(rect);
+            }
+            const left = Math.min(m.startX, m.currentX);
+            const top = Math.min(m.startY, m.currentY);
+            const width = Math.abs(m.currentX - m.startX);
+            const height = Math.abs(m.currentY - m.startY);
+            rect.style.left = left + 'px';
+            rect.style.top = top + 'px';
+            rect.style.width = width + 'px';
+            rect.style.height = height + 'px';
+        }
+
+        function commitMarquee() {
+            const m = state.marquee;
+            if (!m) return;
+            const left = Math.min(m.startX, m.currentX);
+            const top = Math.min(m.startY, m.currentY);
+            const right = Math.max(m.startX, m.currentX);
+            const bottom = Math.max(m.startY, m.currentY);
+
+            // Only commit if the user actually dragged a non-trivial rect
+            const moved = (right - left) > 3 || (bottom - top) > 3;
+            if (moved) {
+                if (m.area === 'canvas') {
+                    state.frontElements.forEach(elem => {
+                        // Hit-test using the rendered DOM size so we catch both small and large items
+                        const node = canvas.querySelector(`.canvas-item[data-id="${elem.id}"]`);
+                        if (!node) return;
+                        const cRect = canvas.getBoundingClientRect();
+                        const nRect = node.getBoundingClientRect();
+                        const itemLeft = nRect.left - cRect.left;
+                        const itemTop = nRect.top - cRect.top;
+                        const itemRight = itemLeft + nRect.width;
+                        const itemBottom = itemTop + nRect.height;
+                        const intersects = !(itemRight < left || itemLeft > right || itemBottom < top || itemTop > bottom);
+                        if (intersects) state.selectedFrontIds.add(elem.id);
+                    });
+                } else {
+                    state.backElements.forEach(elem => {
+                        if (elem.parentId != null) return; // marquee only picks top-level blocks
+                        const node = codeWorkspace.querySelector(`.code-item[data-id="${elem.id}"]`);
+                        if (!node) return;
+                        const cRect = codeWorkspace.getBoundingClientRect();
+                        const nRect = node.getBoundingClientRect();
+                        const itemLeft = nRect.left - cRect.left;
+                        const itemTop = nRect.top - cRect.top;
+                        const itemRight = itemLeft + nRect.width;
+                        const itemBottom = itemTop + nRect.height;
+                        const intersects = !(itemRight < left || itemLeft > right || itemBottom < top || itemTop > bottom);
+                        if (intersects) state.selectedBackIds.add(elem.id);
+                    });
+                }
+            }
+
+            state.marquee = null;
+            document.querySelectorAll('.selection-rect').forEach(r => r.remove());
+            refreshSelectionVisuals();
+        }
+
         const elementDefaults = {
-            button: { text: 'Click me', name: 'button1' },
-            text: { text: 'Sample text', style: '' },
+            button: { text: 'Click me', name: 'button1', width: '', height: '' },
+            text: { text: 'Sample text', tag: 'p' },
             input: { placeholder: 'Enter text', value: '' },
-            progress: { value: '[value]', max: '[max]' },
+            progress: { value: '[value]', max: '[max]', width: '200', height: '' },
             checkbox: { text: 'Check me', name: 'checkbox1', checked: false },
-            heading: { text: 'Heading', level: 1 },
-            image: { src: 'https://via.placeholder.com/200', width: '200', height: '150' }
+            image: { src: '', width: '200', height: '150' }
         };
+
+        // Migrate legacy heading elements and ensure text elements have a tag
+        function migrateFrontElements() {
+            state.frontElements.forEach(elem => {
+                if (elem.type === 'heading') {
+                    elem.type = 'text';
+                    elem.tag = `h${elem.level || 1}`;
+                    delete elem.level;
+                } else if (elem.type === 'text' && !elem.tag) {
+                    elem.tag = 'p';
+                }
+            });
+        }
 
         const codeBlockDefaults = {
             variable: { name: 'myVar', value: '0' },
@@ -1437,6 +2171,7 @@
         applyTheme();
         document.getElementById('darkModeToggle').checked = state.darkMode;
         document.getElementById('poipoleToggle').checked = state.poipoleMode;
+        document.getElementById('snapToGridToggle').checked = state.snapToGrid;
         document.getElementById('masterVolume').value = state.masterVolume;
         document.getElementById('uiVolume').value = state.uiVolume;
 
@@ -1451,6 +2186,13 @@
             state.poipoleMode = e.target.checked;
             localStorage.setItem('poipoleMode', state.poipoleMode);
             applyTheme();
+            playSound('click');
+        });
+
+        document.getElementById('snapToGridToggle').addEventListener('change', (e) => {
+            state.snapToGrid = e.target.checked;
+            localStorage.setItem('snapToGrid', state.snapToGrid);
+            applySnapGridVisuals();
             playSound('click');
         });
 
@@ -1578,23 +2320,263 @@
                 
                 const frontTab = document.getElementById('frontTabContent');
                 const backTab = document.getElementById('backTabContent');
+                const cssTab = document.getElementById('cssTabContent');
                 
+                frontTab.classList.remove('active');
+                backTab.classList.remove('active');
+                cssTab.classList.remove('active');
+
+                document.getElementById('elementsList').parentElement.style.display = 'none';
+                document.getElementById('backTab').style.display = 'none';
+                document.getElementById('cssTab').style.display = 'none';
+
                 if (state.currentTab === 'front') {
                     frontTab.classList.add('active');
-                    backTab.classList.remove('active');
                     document.getElementById('elementsList').parentElement.style.display = 'block';
-                    document.getElementById('backTab').style.display = 'none';
                     document.getElementById('sidebarTitle').textContent = 'Elements';
-                } else {
-                    frontTab.classList.remove('active');
+                } else if (state.currentTab === 'back') {
                     backTab.classList.add('active');
-                    document.getElementById('elementsList').parentElement.style.display = 'none';
                     document.getElementById('backTab').style.display = 'block';
                     document.getElementById('sidebarTitle').textContent = 'Code Blocks';
+                } else if (state.currentTab === 'css') {
+                    cssTab.classList.add('active');
+                    document.getElementById('cssTab').style.display = 'block';
+                    document.getElementById('sidebarTitle').textContent = 'Style Targets';
                 }
                 playSound('click');
             });
         });
+
+        // CSS target items: click to add a rule for that selector
+        document.querySelectorAll('.css-target-item').forEach(item => {
+            item.addEventListener('click', () => {
+                addCssRule(item.dataset.selector);
+                playSound('click');
+            });
+        });
+
+        function addCssRule(selector) {
+            // If a rule already exists for this selector, just scroll to it
+            const existing = state.cssRules.find(r => r.selector === selector);
+            if (existing) {
+                const card = document.querySelector(`.css-rule[data-id="${existing.id}"]`);
+                if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
+            state.cssRules.push({
+                id: Date.now(),
+                selector,
+                fontSize: '',
+                color: '',
+                backgroundColor: '',
+                backgroundImage: '',
+                fontFamily: '',
+                fontWeight: '',
+                textAlign: ''
+            });
+            renderCssRules();
+        }
+
+        function renderCssRules() {
+            const workspace = document.getElementById('cssWorkspace');
+            workspace.innerHTML = '';
+
+            if (state.cssRules.length === 0) {
+                const hint = document.createElement('div');
+                hint.className = 'css-empty-hint';
+                hint.textContent = 'Click a style target on the left (body, p, h1, h2, h3, h4, …) to add a CSS rule. Leave a field blank to skip that property.';
+                workspace.appendChild(hint);
+                schedulePreviewUpdate();
+                return;
+            }
+
+            const fontFamilyOptions = [
+                ['', '(inherit)'],
+                ['system-ui, -apple-system, sans-serif', 'System Sans-serif'],
+                ['Georgia, serif', 'Serif (Georgia)'],
+                ['"Times New Roman", serif', 'Times New Roman'],
+                ['Arial, sans-serif', 'Arial'],
+                ['Verdana, sans-serif', 'Verdana'],
+                ['"Courier New", monospace', 'Courier New'],
+                ['monospace', 'Monospace'],
+                ['cursive', 'Cursive'],
+                ['fantasy', 'Fantasy']
+            ];
+
+            state.cssRules.forEach(rule => {
+                const card = document.createElement('div');
+                card.className = 'css-rule';
+                card.dataset.id = rule.id;
+
+                const familyOptionsHtml = fontFamilyOptions.map(([val, label]) =>
+                    `<option value="${val}" ${rule.fontFamily === val ? 'selected' : ''}>${label}</option>`
+                ).join('');
+
+                const isBody = rule.selector === 'body';
+
+                const textFieldsTop = isBody ? '' : `
+                        <div class="css-field">
+                            <label>font-size</label>
+                            <input type="text" data-prop="fontSize" value="${rule.fontSize || ''}" placeholder="e.g. 16px, 1.5rem, 120%">
+                        </div>
+                        <div class="css-field">
+                            <label>color</label>
+                            <div class="css-color-row">
+                                <input type="color" data-prop-color="color" value="${/^#[0-9a-f]{6}$/i.test(rule.color) ? rule.color : '#000000'}">
+                                <input type="text" data-prop="color" value="${rule.color || ''}" placeholder="(none) — e.g. #ff0000 or red">
+                                <button class="css-clear-btn" data-clear="color">clear</button>
+                            </div>
+                        </div>
+                `;
+
+                const textFieldsBottom = isBody ? '' : `
+                        <div class="css-field">
+                            <label>font-family</label>
+                            <select data-prop="fontFamily">${familyOptionsHtml}</select>
+                        </div>
+                        <div class="css-field">
+                            <label>font-weight</label>
+                            <select data-prop="fontWeight">
+                                <option value="" ${!rule.fontWeight ? 'selected' : ''}>(inherit)</option>
+                                <option value="normal" ${rule.fontWeight === 'normal' ? 'selected' : ''}>Normal (400)</option>
+                                <option value="bold" ${rule.fontWeight === 'bold' ? 'selected' : ''}>Bold (700)</option>
+                                <option value="300" ${rule.fontWeight === '300' ? 'selected' : ''}>Light (300)</option>
+                                <option value="600" ${rule.fontWeight === '600' ? 'selected' : ''}>Semi-bold (600)</option>
+                                <option value="800" ${rule.fontWeight === '800' ? 'selected' : ''}>Extra-bold (800)</option>
+                            </select>
+                        </div>
+                        <div class="css-field">
+                            <label>text-align</label>
+                            <select data-prop="textAlign">
+                                <option value="" ${!rule.textAlign ? 'selected' : ''}>(inherit)</option>
+                                <option value="left" ${rule.textAlign === 'left' ? 'selected' : ''}>Left</option>
+                                <option value="center" ${rule.textAlign === 'center' ? 'selected' : ''}>Center</option>
+                                <option value="right" ${rule.textAlign === 'right' ? 'selected' : ''}>Right</option>
+                                <option value="justify" ${rule.textAlign === 'justify' ? 'selected' : ''}>Justify</option>
+                            </select>
+                        </div>
+                `;
+
+                const bodyHint = isBody
+                    ? `<div style="font-size: 11px; opacity: 0.7; margin-bottom: 10px; font-style: italic;">Page background only. For text styling, add a rule for a specific selector (p, h1, h2, …).</div>`
+                    : '';
+
+                card.innerHTML = `
+                    <div class="css-rule-header">
+                        <span class="css-rule-selector">${rule.selector}</span>
+                        <button class="css-rule-delete" title="Remove rule">🗑 Remove</button>
+                    </div>
+                    ${bodyHint}
+                    <div class="css-rule-fields">
+                        ${textFieldsTop}
+                        <div class="css-field">
+                            <label>background-color</label>
+                            <div class="css-color-row">
+                                <input type="color" data-prop-color="backgroundColor" value="${/^#[0-9a-f]{6}$/i.test(rule.backgroundColor) ? rule.backgroundColor : '#ffffff'}">
+                                <span class="css-current-value ${rule.backgroundColor ? '' : 'css-none'}">${rule.backgroundColor || '(none)'}</span>
+                                <button class="css-clear-btn" data-clear="backgroundColor">clear</button>
+                            </div>
+                        </div>
+                        <div class="css-field">
+                            <label>background-image</label>
+                            <div class="css-color-row">
+                                <button type="button" class="css-upload-btn" data-upload-bg>📁 Choose File</button>
+                                ${rule.backgroundImage
+                                    ? `<img class="css-img-preview" src="${rule.backgroundImage}" alt="">`
+                                    : `<span class="css-current-value css-none">(no image)</span>`}
+                                <button class="css-clear-btn" data-clear="backgroundImage">clear</button>
+                            </div>
+                        </div>
+                        ${textFieldsBottom}
+                    </div>
+                `;
+
+                // Wire up text/select inputs
+                card.querySelectorAll('[data-prop]').forEach(input => {
+                    const prop = input.dataset.prop;
+                    const eventName = input.tagName === 'SELECT' ? 'change' : 'input';
+                    input.addEventListener(eventName, (e) => {
+                        rule[prop] = e.target.value;
+                        // If this is a color text input, sync its color picker sibling
+                        if ((prop === 'color' || prop === 'backgroundColor') && /^#[0-9a-f]{6}$/i.test(e.target.value)) {
+                            const colorPicker = card.querySelector(`[data-prop-color="${prop}"]`);
+                            if (colorPicker) colorPicker.value = e.target.value;
+                        }
+                        schedulePreviewUpdate();
+                    });
+                });
+
+                // Color picker → text input sync
+                card.querySelectorAll('[data-prop-color]').forEach(picker => {
+                    const prop = picker.dataset.propColor;
+                    picker.addEventListener('input', (e) => {
+                        rule[prop] = e.target.value;
+                        const textInput = card.querySelector(`[data-prop="${prop}"]`);
+                        if (textInput) textInput.value = e.target.value;
+                        // For background-color we removed the text input — refresh the card
+                        // so the displayed "current value" reflects the new pick.
+                        if (prop === 'backgroundColor') {
+                            renderCssRules();
+                        }
+                        schedulePreviewUpdate();
+                    });
+                });
+
+                // Background image upload
+                const bgUploadBtn = card.querySelector('[data-upload-bg]');
+                if (bgUploadBtn) {
+                    bgUploadBtn.addEventListener('click', () => {
+                        window.uploadImageFile((dataUrl) => {
+                            rule.backgroundImage = dataUrl;
+                            renderCssRules();
+                            schedulePreviewUpdate();
+                            playSound('success');
+                        });
+                    });
+                }
+
+                // Clear buttons
+                card.querySelectorAll('.css-clear-btn').forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const prop = btn.dataset.clear;
+                        rule[prop] = '';
+                        renderCssRules();
+                    });
+                });
+
+                // Delete rule
+                card.querySelector('.css-rule-delete').addEventListener('click', () => {
+                    state.cssRules = state.cssRules.filter(r => r.id !== rule.id);
+                    renderCssRules();
+                    playSound('delete');
+                });
+
+                workspace.appendChild(card);
+            });
+
+            schedulePreviewUpdate();
+        }
+
+        function generateCSSText() {
+            return state.cssRules.map(rule => {
+                const props = [];
+                const isBody = rule.selector === 'body';
+                if (!isBody && rule.fontSize) props.push(`font-size: ${rule.fontSize}`);
+                if (!isBody && rule.color) props.push(`color: ${rule.color}`);
+                if (rule.backgroundColor) props.push(`background-color: ${rule.backgroundColor}`);
+                if (rule.backgroundImage) {
+                    props.push(`background-image: url('${rule.backgroundImage}')`);
+                    props.push(`background-size: cover`);
+                    props.push(`background-repeat: no-repeat`);
+                    props.push(`background-position: center`);
+                }
+                if (!isBody && rule.fontFamily) props.push(`font-family: ${rule.fontFamily}`);
+                if (!isBody && rule.fontWeight) props.push(`font-weight: ${rule.fontWeight}`);
+                if (!isBody && rule.textAlign) props.push(`text-align: ${rule.textAlign}`);
+                if (props.length === 0) return '';
+                return `${rule.selector} { ${props.join('; ')}; }`;
+            }).filter(r => r).join('\n');
+        }
 
         document.getElementById('elementsList').addEventListener('dragstart', (e) => {
             if (e.target.classList.contains('element-item')) {
@@ -1620,8 +2602,8 @@
             e.preventDefault();
             if (state.draggedElement) {
                 const rect = canvas.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
+                const x = snap(e.clientX - rect.left);
+                const y = snap(e.clientY - rect.top);
 
                 const id = Date.now();
                 const defaults = elementDefaults[state.draggedElement];
@@ -1644,26 +2626,57 @@
         codeWorkspace.addEventListener('dragover', (e) => {
             e.preventDefault();
             e.dataTransfer.dropEffect = 'copy';
+            // Show which container (if any) would catch this drop, and where
+            // inside that container the new block would land.
+            document.querySelectorAll('.code-children.drag-over').forEach(c => c.classList.remove('drag-over'));
+            const containerId = findContainerAt(e.clientX, e.clientY, null);
+            if (containerId != null) {
+                const container = codeWorkspace.querySelector(`.code-children[data-parent-id="${containerId}"]`);
+                if (container) container.classList.add('drag-over');
+                showInsertionIndicator(containerId, e.clientY);
+            } else {
+                clearInsertionIndicators();
+            }
+        });
+
+        codeWorkspace.addEventListener('dragleave', (e) => {
+            // Only clear if we actually left the workspace, not just moved between children
+            if (e.target === codeWorkspace) {
+                document.querySelectorAll('.code-children.drag-over').forEach(c => c.classList.remove('drag-over'));
+                clearInsertionIndicators();
+            }
         });
 
         codeWorkspace.addEventListener('drop', (e) => {
             e.preventDefault();
+            document.querySelectorAll('.code-children.drag-over').forEach(c => c.classList.remove('drag-over'));
+            clearInsertionIndicators();
             if (state.draggedCode) {
-                const rect = codeWorkspace.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
+                const containerId = findContainerAt(e.clientX, e.clientY, null);
+                const insertAt = containerId != null ? findInsertionIndex(containerId, e.clientY) : null;
 
                 const id = Date.now();
                 const defaults = codeBlockDefaults[state.draggedCode];
                 const element = {
                     id,
                     type: state.draggedCode,
-                    x,
-                    y,
+                    x: 0,
+                    y: 0,
+                    parentId: containerId,
                     ...JSON.parse(JSON.stringify(defaults))
                 };
 
-                state.backElements.push(element);
+                if (containerId == null) {
+                    const rect = codeWorkspace.getBoundingClientRect();
+                    element.x = snap(e.clientX - rect.left);
+                    element.y = snap(e.clientY - rect.top);
+                    state.backElements.push(element);
+                } else if (insertAt != null) {
+                    state.backElements.splice(insertAt, 0, element);
+                } else {
+                    state.backElements.push(element);
+                }
+
                 renderBackElements();
                 state.draggedCode = null;
                 playSound('success');
@@ -1687,18 +2700,25 @@
 
                 let content = '';
                 switch (elem.type) {
-                    case 'button':
-                        content = `<button style="cursor: pointer; padding: 6px 12px; pointer-events: none;">${elem.text}</button>`;
+                    case 'button': {
+                        const w = elem.width ? `width: ${elem.width}px;` : '';
+                        const h = elem.height ? `height: ${elem.height}px;` : '';
+                        content = `<button style="cursor: pointer; padding: 6px 12px; pointer-events: none; ${w} ${h}">${elem.text}</button>`;
                         break;
+                    }
                     case 'text':
-                        content = elem.text;
+                        const textTag = elem.tag || 'p';
+                        content = `<${textTag} style="margin: 0; pointer-events: none;">${elem.text}</${textTag}>`;
                         break;
                     case 'input':
                         content = `<input type="text" placeholder="${elem.placeholder}" style="padding: 6px; pointer-events: none;">`;
                         break;
-                    case 'progress':
-                        content = `<progress value="${elem.value}" max="${elem.max}" style="width: 100%;"></progress>`;
+                    case 'progress': {
+                        const w = elem.width ? `width: ${elem.width}px;` : 'width: 200px;';
+                        const h = elem.height ? `height: ${elem.height}px;` : '';
+                        content = `<progress value="${elem.value}" max="${elem.max}" style="${w} ${h}"></progress>`;
                         break;
+                    }
                     case 'checkbox':
                         content = `<input type="checkbox" style="pointer-events: none;"> ${elem.text}`;
                         break;
@@ -1706,17 +2726,45 @@
                         content = `<h${elem.level}>${elem.text}</h${elem.level}>`;
                         break;
                     case 'image':
-                        content = `<img src="${elem.src}" style="width: ${elem.width}px; height: ${elem.height}px; object-fit: cover;">`;
+                        if (elem.src) {
+                            content = `<img src="${elem.src}" style="width: ${elem.width}px; height: ${elem.height}px; object-fit: cover;">`;
+                        } else {
+                            content = `<div style="width: ${elem.width}px; height: ${elem.height}px; background: #eee; display:flex; align-items:center; justify-content:center; color: #999; font-size: 11px; border: 1px dashed #ccc;">no image — double-click to upload</div>`;
+                        }
                         break;
                 }
 
                 el.innerHTML = content;
 
                 el.addEventListener('mousedown', (e) => {
+                    if (e.button !== 0) return;
                     const rect = canvas.getBoundingClientRect();
+
+                    // If shift-clicking, toggle membership in selection
+                    if (e.shiftKey) {
+                        if (state.selectedFrontIds.has(elem.id)) {
+                            state.selectedFrontIds.delete(elem.id);
+                        } else {
+                            state.selectedFrontIds.add(elem.id);
+                        }
+                        refreshSelectionVisuals();
+                        return; // don't start a drag on shift+click
+                    }
+
+                    // If clicking an unselected element, switch selection to just it.
+                    // If clicking a selected element, keep the multi-selection (so we can drag the group).
+                    if (!state.selectedFrontIds.has(elem.id)) {
+                        state.selectedFrontIds.clear();
+                        state.selectedFrontIds.add(elem.id);
+                        refreshSelectionVisuals();
+                    }
+
                     state.draggingFrontId = elem.id;
                     state.dragOffsetFrontX = e.clientX - rect.left - elem.x;
                     state.dragOffsetFrontY = e.clientY - rect.top - elem.y;
+                    state.dragStartClientX = e.clientX;
+                    state.dragStartClientY = e.clientY;
+                    state.hasDragged = false;
                     el.classList.add('selected');
                     state.selectedElement = elem.id;
                 });
@@ -1724,131 +2772,397 @@
                 el.addEventListener('contextmenu', (e) => {
                     e.preventDefault();
                     e.stopPropagation();
+                    state.draggingFrontId = null;
+                    state.hasDragged = false;
                     closeAllMenus();
                     openEditorMenu(elem, e);
                 });
 
                 el.addEventListener('dblclick', (e) => {
                     e.stopPropagation();
+                    state.draggingFrontId = null;
+                    state.hasDragged = false;
                     closeAllMenus();
                     openEditorMenu(elem, e);
                 });
 
                 canvas.appendChild(el);
             });
+
+            refreshSelectionVisuals();
+            schedulePreviewUpdate();
+        }
+
+        function getBackBlockText(elem) {
+            switch (elem.type) {
+                case 'variable': return `${elem.name} = ${elem.value}`;
+                case 'string': return `${elem.name} = ${elem.value}`;
+                case 'if': return `if (${elem.condition})`;
+                case 'loop': return `for ${elem.variable} in range(${elem.start}, ${elem.end})`;
+                case 'onclick': return `onClick ${elem.buttonName} ${elem.action || '...'}`;
+                case 'onchange': return `onChange ${elem.checkboxName} ${elem.action || '...'}`;
+            }
+            return '';
+        }
+
+        function attachBackBlockHandlers(el, elem) {
+            el.addEventListener('mousedown', (e) => {
+                if (e.button !== 0) return;
+                e.stopPropagation();
+                const elRect = el.getBoundingClientRect();
+
+                if (e.shiftKey) {
+                    if (state.selectedBackIds.has(elem.id)) {
+                        state.selectedBackIds.delete(elem.id);
+                    } else {
+                        state.selectedBackIds.add(elem.id);
+                    }
+                    refreshSelectionVisuals();
+                    return;
+                }
+
+                if (!state.selectedBackIds.has(elem.id)) {
+                    state.selectedBackIds.clear();
+                    state.selectedBackIds.add(elem.id);
+                    refreshSelectionVisuals();
+                }
+
+                state.draggingCodeId = elem.id;
+                state.dragOffsetX = e.clientX - elRect.left;
+                state.dragOffsetY = e.clientY - elRect.top;
+                state.dragStartClientX = e.clientX;
+                state.dragStartClientY = e.clientY;
+                state.hasDragged = false;
+                state.selectedCode = elem.id;
+            });
+
+            el.addEventListener('contextmenu', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                state.draggingCodeId = null;
+                state.hasDragged = false;
+                closeAllMenus();
+                openCodeBlockEditor(elem, e);
+            });
+
+            el.addEventListener('dblclick', (e) => {
+                e.stopPropagation();
+                state.draggingCodeId = null;
+                state.hasDragged = false;
+                closeAllMenus();
+                openCodeBlockEditor(elem, e);
+            });
+        }
+
+        function createBackBlockDOM(elem) {
+            const el = document.createElement('div');
+            el.className = 'code-item';
+            el.dataset.id = elem.id;
+
+            if (!elem.parentId) {
+                el.style.left = elem.x + 'px';
+                el.style.top = elem.y + 'px';
+            }
+
+            const header = document.createElement('div');
+            header.className = 'code-header';
+            header.textContent = getBackBlockText(elem);
+            el.appendChild(header);
+
+            if (elem.type === 'if' || elem.type === 'loop') {
+                el.classList.add('code-container');
+                const childrenContainer = document.createElement('div');
+                childrenContainer.className = 'code-children';
+                childrenContainer.dataset.parentId = elem.id;
+
+                const children = state.backElements.filter(c => c.parentId === elem.id);
+                children.forEach(child => {
+                    childrenContainer.appendChild(createBackBlockDOM(child));
+                });
+
+                // Always show a drop hint so there's a visible target even when
+                // the container already has children
+                const hint = document.createElement('div');
+                hint.className = 'code-drop-hint';
+                hint.textContent = children.length === 0
+                    ? '⊕ drag blocks here'
+                    : '⊕ drop more here';
+                childrenContainer.appendChild(hint);
+
+                el.appendChild(childrenContainer);
+            }
+
+            attachBackBlockHandlers(el, elem);
+
+            if (state.selectedCode === elem.id) {
+                el.classList.add('selected');
+            }
+
+            return el;
         }
 
         function renderBackElements() {
             codeWorkspace.querySelectorAll('.code-item').forEach(el => el.remove());
 
-            const sortedElements = [...state.backElements].sort((a, b) => {
-                return a.y - b.y;
+            const topLevel = state.backElements
+                .filter(e => !e.parentId)
+                .sort((a, b) => a.y - b.y);
+
+            topLevel.forEach(elem => {
+                codeWorkspace.appendChild(createBackBlockDOM(elem));
             });
 
-            sortedElements.forEach(elem => {
-                const el = document.createElement('div');
-                el.className = 'code-item';
-                el.dataset.id = elem.id;
-                el.style.left = elem.x + 'px';
-                el.style.top = elem.y + 'px';
+            refreshSelectionVisuals();
+            schedulePreviewUpdate();
+        }
 
-                let content = '';
-                switch (elem.type) {
-                    case 'variable':
-                        content = `${elem.name} = ${elem.value}`;
-                        break;
-                    case 'string':
-                        content = `${elem.name} = ${elem.value}`;
-                        break;
-                    case 'if':
-                        content = `if (${elem.condition})`;
-                        break;
-                    case 'loop':
-                        content = `for ${elem.variable} in range(${elem.start}, ${elem.end})`;
-                        break;
-                    case 'onclick':
-                        content = `onClick ${elem.buttonName} ${elem.action || '...'}`;
-                        break;
-                    case 'onchange':
-                        content = `onChange ${elem.checkboxName} ${elem.action || '...'}`;
-                        break;
+        function findContainerAt(clientX, clientY, excludeId) {
+            const excluded = new Set();
+            if (excludeId != null) {
+                excluded.add(excludeId);
+                let added = true;
+                while (added) {
+                    added = false;
+                    state.backElements.forEach(b => {
+                        if (b.parentId != null && excluded.has(b.parentId) && !excluded.has(b.id)) {
+                            excluded.add(b.id);
+                            added = true;
+                        }
+                    });
                 }
+            }
 
-                el.textContent = content;
-
-                el.addEventListener('mousedown', (e) => {
-                    const rect = codeWorkspace.getBoundingClientRect();
-                    state.draggingCodeId = elem.id;
-                    state.dragOffsetX = e.clientX - rect.left - elem.x;
-                    state.dragOffsetY = e.clientY - rect.top - elem.y;
-                    el.classList.add('selected');
-                    state.selectedCode = elem.id;
-                });
-
-                el.addEventListener('contextmenu', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    closeAllMenus();
-                    openCodeBlockEditor(elem, e);
-                });
-
-                el.addEventListener('dblclick', (e) => {
-                    e.stopPropagation();
-                    closeAllMenus();
-                    openCodeBlockEditor(elem, e);
-                });
-
-                codeWorkspace.appendChild(el);
+            const containers = codeWorkspace.querySelectorAll('.code-children');
+            let found = null;
+            let foundDepth = -1;
+            containers.forEach(container => {
+                const parentId = parseInt(container.dataset.parentId);
+                if (excluded.has(parentId)) return;
+                const rect = container.getBoundingClientRect();
+                if (clientX >= rect.left && clientX <= rect.right &&
+                    clientY >= rect.top && clientY <= rect.bottom) {
+                    let depth = 0;
+                    let p = state.backElements.find(b => b.id === parentId);
+                    while (p && p.parentId != null) {
+                        depth++;
+                        p = state.backElements.find(b => b.id === p.parentId);
+                    }
+                    if (depth > foundDepth) {
+                        found = parentId;
+                        foundDepth = depth;
+                    }
+                }
             });
+            return found;
+        }
+
+        // Given a parent container and a cursor Y, return the index in
+        // state.backElements where a new child should be inserted to land in
+        // the gap closest to the cursor. Children are addressed by their
+        // sibling order (first child = position 0, etc.); the returned value
+        // is the array index in state.backElements where to splice.
+        function findInsertionIndex(parentId, clientY) {
+            const container = codeWorkspace.querySelector(`.code-children[data-parent-id="${parentId}"]`);
+            if (!container) return null;
+            // The DOM children we care about are the rendered `.code-item` siblings;
+            // the bottom hint and any insertion indicator should be ignored.
+            const childNodes = Array.from(container.children).filter(c => c.classList.contains('code-item'));
+            // Decide which slot (0..N) the cursor is in. Slot i means: insert
+            // before child at position i (so slot 0 is "very top", slot N is "after last").
+            let slot = childNodes.length;
+            for (let i = 0; i < childNodes.length; i++) {
+                const r = childNodes[i].getBoundingClientRect();
+                const midpoint = r.top + r.height / 2;
+                if (clientY < midpoint) { slot = i; break; }
+            }
+            // Map slot → array index in state.backElements. We splice in the
+            // global array right before whatever child currently occupies that
+            // slot, or at the end of all this parent's children.
+            const childIds = childNodes.map(n => parseInt(n.dataset.id));
+            if (slot < childIds.length) {
+                const beforeId = childIds[slot];
+                return state.backElements.findIndex(b => b.id === beforeId);
+            } else {
+                // After last child of this parent
+                if (childIds.length === 0) {
+                    // Empty container — append at end of all backElements works fine
+                    return state.backElements.length;
+                }
+                const lastId = childIds[childIds.length - 1];
+                return state.backElements.findIndex(b => b.id === lastId) + 1;
+            }
+        }
+
+        function clearInsertionIndicators() {
+            document.querySelectorAll('.code-insert-indicator').forEach(n => n.remove());
+        }
+
+        function showInsertionIndicator(parentId, clientY) {
+            clearInsertionIndicators();
+            const container = codeWorkspace.querySelector(`.code-children[data-parent-id="${parentId}"]`);
+            if (!container) return;
+            const childNodes = Array.from(container.children).filter(c => c.classList.contains('code-item'));
+            const indicator = document.createElement('div');
+            indicator.className = 'code-insert-indicator';
+
+            // Where to put it: in front of the child whose midpoint is below the cursor,
+            // otherwise after the last child.
+            let inserted = false;
+            for (let i = 0; i < childNodes.length; i++) {
+                const r = childNodes[i].getBoundingClientRect();
+                const midpoint = r.top + r.height / 2;
+                if (clientY < midpoint) {
+                    container.insertBefore(indicator, childNodes[i]);
+                    inserted = true;
+                    break;
+                }
+            }
+            if (!inserted) {
+                // After last child but before the bottom hint, if any
+                const hint = container.querySelector('.code-drop-hint');
+                if (hint) container.insertBefore(indicator, hint);
+                else container.appendChild(indicator);
+            }
         }
 
         document.addEventListener('mousemove', (e) => {
+            // Marquee selection rectangle
+            if (state.marquee) {
+                const container = state.marquee.area === 'canvas' ? canvas : codeWorkspace;
+                const rect = container.getBoundingClientRect();
+                state.marquee.currentX = e.clientX - rect.left;
+                state.marquee.currentY = e.clientY - rect.top;
+                renderMarquee();
+                return;
+            }
+
             if (state.draggingFrontId) {
                 const elem = state.frontElements.find(el => el.id === state.draggingFrontId);
-                if (elem) {
-                    const rect = canvas.getBoundingClientRect();
-                    elem.x = e.clientX - rect.left - state.dragOffsetFrontX;
-                    elem.y = e.clientY - rect.top - state.dragOffsetFrontY;
-
-                    const el = canvas.querySelector(`[data-id="${elem.id}"]`);
-                    if (el) {
-                        el.style.left = elem.x + 'px';
-                        el.style.top = elem.y + 'px';
-                    }
+                if (!elem) return;
+                const dx = e.clientX - state.dragStartClientX;
+                const dy = e.clientY - state.dragStartClientY;
+                if (!state.hasDragged && Math.abs(dx) < 4 && Math.abs(dy) < 4) return;
+                if (!state.hasDragged) {
+                    // Snapshot starting positions so group-drag is delta-based
+                    state.frontElements.forEach(el => {
+                        if (state.selectedFrontIds.has(el.id)) {
+                            el._startX = el.x;
+                            el._startY = el.y;
+                        }
+                    });
                 }
+                state.hasDragged = true;
+
+                const rect = canvas.getBoundingClientRect();
+                const targetX = snap(e.clientX - rect.left - state.dragOffsetFrontX);
+                const targetY = snap(e.clientY - rect.top - state.dragOffsetFrontY);
+                const deltaX = targetX - elem._startX;
+                const deltaY = targetY - elem._startY;
+
+                state.frontElements.forEach(el => {
+                    if (!state.selectedFrontIds.has(el.id)) return;
+                    el.x = el._startX + deltaX;
+                    el.y = el._startY + deltaY;
+                    const node = canvas.querySelector(`[data-id="${el.id}"]`);
+                    if (node) {
+                        node.style.left = el.x + 'px';
+                        node.style.top = el.y + 'px';
+                    }
+                });
             }
 
             if (state.draggingCodeId) {
                 const elem = state.backElements.find(el => el.id === state.draggingCodeId);
-                if (elem) {
-                    const rect = codeWorkspace.getBoundingClientRect();
-                    elem.x = e.clientX - rect.left - state.dragOffsetX;
-                    elem.y = e.clientY - rect.top - state.dragOffsetY;
+                if (!elem) return;
+                const dx = e.clientX - state.dragStartClientX;
+                const dy = e.clientY - state.dragStartClientY;
+                if (!state.hasDragged && Math.abs(dx) < 4 && Math.abs(dy) < 4) return;
 
-                    const el = codeWorkspace.querySelector(`[data-id="${elem.id}"]`);
-                    if (el) {
-                        el.style.left = elem.x + 'px';
-                        el.style.top = elem.y + 'px';
+                if (!state.hasDragged) {
+                    state.hasDragged = true;
+                    // If this block was nested, detach it so it can move freely
+                    if (elem.parentId != null) {
+                        const workspaceRect = codeWorkspace.getBoundingClientRect();
+                        elem.x = snap(e.clientX - workspaceRect.left - state.dragOffsetX);
+                        elem.y = snap(e.clientY - workspaceRect.top - state.dragOffsetY);
+                        elem.parentId = null;
+                        renderBackElements();
+                        return;
                     }
+                }
+
+                const workspaceRect = codeWorkspace.getBoundingClientRect();
+                elem.x = snap(e.clientX - workspaceRect.left - state.dragOffsetX);
+                elem.y = snap(e.clientY - workspaceRect.top - state.dragOffsetY);
+
+                const el = codeWorkspace.querySelector(`[data-id="${elem.id}"]`);
+                if (el && elem.parentId == null) {
+                    el.style.left = elem.x + 'px';
+                    el.style.top = elem.y + 'px';
+                }
+
+                // Highlight any container the cursor is over
+                document.querySelectorAll('.code-children.drag-over').forEach(c => c.classList.remove('drag-over'));
+                const containerId = findContainerAt(e.clientX, e.clientY, elem.id);
+                if (containerId != null) {
+                    const container = codeWorkspace.querySelector(`.code-children[data-parent-id="${containerId}"]`);
+                    if (container) container.classList.add('drag-over');
+                    showInsertionIndicator(containerId, e.clientY);
+                } else {
+                    clearInsertionIndicators();
                 }
             }
         });
 
-        document.addEventListener('mouseup', () => {
+        document.addEventListener('mouseup', (e) => {
+            if (state.marquee) {
+                commitMarquee();
+                return;
+            }
             if (state.draggingFrontId) {
+                const wasDragging = state.hasDragged;
+                state.frontElements.forEach(el => {
+                    delete el._startX;
+                    delete el._startY;
+                });
                 state.draggingFrontId = null;
-                renderFrontElements();
+                state.hasDragged = false;
+                if (wasDragging) {
+                    renderFrontElements();
+                    schedulePreviewUpdate();
+                }
             }
             if (state.draggingCodeId) {
                 const elem = state.backElements.find(el => el.id === state.draggingCodeId);
-                if (elem) {
-                    const rect = codeWorkspace.getBoundingClientRect();
-                    if (elem.x < rect.left || elem.x > rect.width || elem.y < rect.top || elem.y > rect.height) {
-                        deleteCodeBlock(elem.id);
+                let needsRerender = false;
+                if (elem && state.hasDragged) {
+                    const containerId = findContainerAt(e.clientX, e.clientY, elem.id);
+                    if (containerId != null) {
+                        // Compute the desired array index BEFORE we change parentId,
+                        // so the indicator's "slot" calculation (based on current DOM)
+                        // is still valid.
+                        const desiredIndex = findInsertionIndex(containerId, e.clientY);
+                        // Remove the elem from its current array position, then splice
+                        // it back in at the target index. Adjust for the removal shift.
+                        const fromIndex = state.backElements.findIndex(b => b.id === elem.id);
+                        let toIndex = desiredIndex == null ? state.backElements.length : desiredIndex;
+                        if (fromIndex !== -1 && fromIndex < toIndex) toIndex -= 1;
+                        if (fromIndex !== -1) state.backElements.splice(fromIndex, 1);
+                        elem.parentId = containerId;
+                        state.backElements.splice(toIndex, 0, elem);
+                    } else {
+                        elem.parentId = null; // dropped on workspace background
                     }
+                    needsRerender = true;
                 }
+                document.querySelectorAll('.code-children.drag-over').forEach(c => c.classList.remove('drag-over'));
+                clearInsertionIndicators();
                 state.draggingCodeId = null;
-                renderBackElements();
+                state.hasDragged = false;
+                if (needsRerender) {
+                    renderBackElements();
+                    schedulePreviewUpdate();
+                }
             }
         });
 
@@ -1867,14 +3181,28 @@
                         <input type="text" id="btnText" value="${elem.text || ''}">
                         <label>Button Name (for events):</label>
                         <input type="text" id="btnName" value="${elem.name || ''}">
-                        <div style="font-size: 11px; color: #666; margin-top: 5px;">Use [varName] for variables</div>
+                        <label>Width (px):</label>
+                        <input type="number" id="btnWidth" value="${elem.width || ''}" placeholder="(auto-fit)">
+                        <label>Height (px):</label>
+                        <input type="number" id="btnHeight" value="${elem.height || ''}" placeholder="(auto-fit)">
+                        <div style="font-size: 11px; color: #666; margin-top: 5px;">Use [varName] for variables. Leave size blank to fit text.</div>
                     `;
                     break;
                 case 'text':
                     html = `
                         <label>Text Content:</label>
                         <input type="text" id="textContent" value="${elem.text || ''}">
-                        <div style="font-size: 11px; color: #666; margin-top: 5px;">Use [varName] for variables</div>
+                        <label>Tag:</label>
+                        <select id="textTag">
+                            <option value="p" ${(elem.tag || 'p') === 'p' ? 'selected' : ''}>Paragraph &lt;p&gt;</option>
+                            <option value="h1" ${elem.tag === 'h1' ? 'selected' : ''}>Heading 1 &lt;h1&gt;</option>
+                            <option value="h2" ${elem.tag === 'h2' ? 'selected' : ''}>Heading 2 &lt;h2&gt;</option>
+                            <option value="h3" ${elem.tag === 'h3' ? 'selected' : ''}>Heading 3 &lt;h3&gt;</option>
+                            <option value="h4" ${elem.tag === 'h4' ? 'selected' : ''}>Heading 4 &lt;h4&gt;</option>
+                            <option value="h5" ${elem.tag === 'h5' ? 'selected' : ''}>Heading 5 &lt;h5&gt;</option>
+                            <option value="h6" ${elem.tag === 'h6' ? 'selected' : ''}>Heading 6 &lt;h6&gt;</option>
+                        </select>
+                        <div style="font-size: 11px; color: #666; margin-top: 5px;">Use [varName] for variables. Style this tag in the CSS tab.</div>
                     `;
                     break;
                 case 'input':
@@ -1890,6 +3218,10 @@
                         <input type="text" id="progressValue" value="${elem.value || ''}">
                         <label>Max Value:</label>
                         <input type="text" id="progressMax" value="${elem.max || ''}">
+                        <label>Width (px):</label>
+                        <input type="number" id="progressWidth" value="${elem.width || ''}" placeholder="200">
+                        <label>Height (px):</label>
+                        <input type="number" id="progressHeight" value="${elem.height || ''}" placeholder="(default)">
                         <div style="font-size: 11px; color: #666; margin-top: 5px;">Use [varName] for dynamic values!</div>
                     `;
                     break;
@@ -1902,28 +3234,19 @@
                         <div style="font-size: 11px; color: #666; margin-top: 5px;">Use [varName] for variables</div>
                     `;
                     break;
-                case 'heading':
-                    html = `
-                        <label>Heading Text:</label>
-                        <input type="text" id="headingText" value="${elem.text || ''}">
-                        <label>Heading Level:</label>
-                        <select id="headingLevel">
-                            <option value="1" ${elem.level === 1 ? 'selected' : ''}>H1</option>
-                            <option value="2" ${elem.level === 2 ? 'selected' : ''}>H2</option>
-                            <option value="3" ${elem.level === 3 ? 'selected' : ''}>H3</option>
-                        </select>
-                        <div style="font-size: 11px; color: #666; margin-top: 5px;">Use [varName] for variables</div>
-                    `;
-                    break;
                 case 'image':
                     html = `
-                        <label>Image URL:</label>
-                        <input type="text" id="imageSrc" value="${elem.src || ''}">
+                        <label>Image:</label>
+                        <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 10px;">
+                            <button type="button" class="css-upload-btn" onclick="window.uploadImageForFrontElement(${elem.id})">📁 Choose File</button>
+                            <img id="imagePreview-${elem.id}" src="${elem.src || ''}" alt="" style="width: 50px; height: 50px; object-fit: cover; border: 1px solid #ccc; border-radius: 3px; ${elem.src ? '' : 'display:none;'}">
+                            <span id="imageNoPreview-${elem.id}" style="font-size: 11px; color: #999; font-style: italic; ${elem.src ? 'display:none;' : ''}">(no image)</span>
+                        </div>
                         <label>Width (px):</label>
                         <input type="number" id="imageWidth" value="${elem.width || ''}">
                         <label>Height (px):</label>
                         <input type="number" id="imageHeight" value="${elem.height || ''}">
-                        <div style="font-size: 11px; color: #666; margin-top: 5px;">Use [varName] for dynamic URLs</div>
+                        <div style="font-size: 11px; color: #666; margin-top: 5px;">Upload an image file from your device.</div>
                     `;
                     break;
             }
@@ -2047,9 +3370,12 @@
                 case 'button':
                     elem.text = document.getElementById('btnText').value;
                     elem.name = document.getElementById('btnName').value;
+                    elem.width = document.getElementById('btnWidth').value;
+                    elem.height = document.getElementById('btnHeight').value;
                     break;
                 case 'text':
                     elem.text = document.getElementById('textContent').value;
+                    elem.tag = document.getElementById('textTag').value;
                     break;
                 case 'input':
                     elem.placeholder = document.getElementById('inputPlaceholder').value;
@@ -2057,17 +3383,22 @@
                 case 'progress':
                     elem.value = document.getElementById('progressValue').value;
                     elem.max = document.getElementById('progressMax').value;
+                    elem.width = document.getElementById('progressWidth').value;
+                    elem.height = document.getElementById('progressHeight').value;
                     break;
                 case 'checkbox':
                     elem.text = document.getElementById('checkboxText').value;
                     elem.name = document.getElementById('checkboxName').value;
                     break;
                 case 'heading':
-                    elem.text = document.getElementById('headingText').value;
-                    elem.level = parseInt(document.getElementById('headingLevel').value);
+                    // Legacy support: a heading edit migrates to a text element
+                    elem.type = 'text';
+                    elem.text = document.getElementById('headingText') ? document.getElementById('headingText').value : elem.text;
+                    elem.tag = `h${parseInt(document.getElementById('headingLevel') ? document.getElementById('headingLevel').value : (elem.level || 1))}`;
+                    delete elem.level;
                     break;
                 case 'image':
-                    elem.src = document.getElementById('imageSrc').value;
+                    // src is already saved by the upload handler
                     elem.width = document.getElementById('imageWidth').value;
                     elem.height = document.getElementById('imageHeight').value;
                     break;
@@ -2130,6 +3461,50 @@
             playSound('delete');
         };
 
+        // File upload helper — opens picker, returns data URL via callback
+        window.uploadImageFile = function(callback) {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.style.display = 'none';
+            document.body.appendChild(input);
+            input.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (evt) => {
+                        callback(evt.target.result);
+                    };
+                    reader.onerror = () => {
+                        alert('Could not read that file.');
+                    };
+                    reader.readAsDataURL(file);
+                }
+                document.body.removeChild(input);
+            });
+            input.click();
+        };
+
+        // Upload an image for an image element on the Front canvas
+        window.uploadImageForFrontElement = function(id) {
+            window.uploadImageFile((dataUrl) => {
+                const elem = state.frontElements.find(e => e.id === id);
+                if (!elem) return;
+                elem.src = dataUrl;
+                // Update the preview thumbnail in the open editor menu, if present
+                const previewImg = document.getElementById('imagePreview-' + id);
+                const noPreview = document.getElementById('imageNoPreview-' + id);
+                if (previewImg) {
+                    previewImg.src = dataUrl;
+                    previewImg.style.display = '';
+                }
+                if (noPreview) noPreview.style.display = 'none';
+                renderFrontElements();
+                schedulePreviewUpdate();
+                playSound('success');
+            });
+        };
+
         function getVariables() {
             const vars = {};
             state.backElements.forEach(elem => {
@@ -2162,43 +3537,241 @@
             playSound('click');
         });
 
+        let previewUpdateTimer = null;
+        function schedulePreviewUpdate() {
+            const modal = document.getElementById('previewModal');
+            if (!modal || !modal.classList.contains('active')) return;
+            if (previewUpdateTimer) clearTimeout(previewUpdateTimer);
+            previewUpdateTimer = setTimeout(() => {
+                const html = generatePreviewHTML();
+                document.getElementById('previewIframe').srcdoc = html;
+            }, 200);
+        }
+
+        function escapeAttr(str) {
+            return String(str).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        }
+
+        function getNestingWrapper(elem) {
+            let prefix = '';
+            let suffix = '';
+            let current = elem;
+            let depth = 0;
+            while (current.parentId != null && depth < 20) {
+                const parent = state.backElements.find(b => b.id === current.parentId);
+                if (!parent) break;
+                if (parent.type === 'if') {
+                    prefix = `if (${parent.condition}) { ` + prefix;
+                    suffix = suffix + ` }`;
+                } else if (parent.type === 'loop') {
+                    prefix = `for (let ${parent.variable} = ${parent.start}; ${parent.variable} < ${parent.end}; ${parent.variable}++) { ` + prefix;
+                    suffix = suffix + ` }`;
+                }
+                current = parent;
+                depth++;
+            }
+            return { prefix, suffix };
+        }
+
+        function isValidIdentifier(s) {
+            return typeof s === 'string' && /^[a-zA-Z_$][a-zA-Z0-9_$]*$/.test(s);
+        }
+
+        // Recursively turn a back-tab block into JS source.
+        // Variables/strings nested inside if/loop become assignments (the variable
+        // is declared once at the top of the preview). Top-level vars are handled
+        // separately as `var` declarations. onclick/onchange are handled as event
+        // listeners and skipped here.
+        function generateBlockCode(block) {
+            switch (block.type) {
+                case 'variable':
+                case 'string': {
+                    if (!isValidIdentifier(block.name)) return '';
+                    const v = block.value;
+                    const raw = (v == null || String(v).trim() === '')
+                        ? (block.type === 'string' ? '""' : '0')
+                        : v;
+                    return `${block.name} = ${raw};`;
+                }
+                case 'if': {
+                    const body = state.backElements
+                        .filter(c => c.parentId === block.id)
+                        .map(c => generateBlockCode(c))
+                        .filter(Boolean)
+                        .join(' ');
+                    return `if (${block.condition}) { ${body} }`;
+                }
+                case 'loop': {
+                    if (!isValidIdentifier(block.variable)) return '';
+                    const body = state.backElements
+                        .filter(c => c.parentId === block.id)
+                        .map(c => generateBlockCode(c))
+                        .filter(Boolean)
+                        .join(' ');
+                    const v = block.variable;
+                    return `for (let ${v} = ${block.start}; ${v} < ${block.end}; ${v}++) { ${body} }`;
+                }
+            }
+            return '';
+        }
+
         function generatePreviewHTML() {
             const variables = getVariables();
-            const sortedElements = [...state.frontElements].sort((a, b) => {
-                if (Math.abs(a.y - b.y) < 50) return a.x - b.x;
-                return a.y - b.y;
-            });
-
+            const elementsForBinding = [];
             let bodyContent = '';
+            let maxX = 400, maxY = 300;
 
-            sortedElements.forEach(elem => {
+            state.frontElements.forEach(elem => {
+                const x = elem.x || 0;
+                const y = elem.y || 0;
+                const posStyle = `position: absolute; left: ${x}px; top: ${y}px;`;
+                const mid = elem.id;
+                const bind = { id: mid };
+                maxX = Math.max(maxX, x + 250);
+                maxY = Math.max(maxY, y + 80);
+
                 switch (elem.type) {
-                    case 'button':
-                        bodyContent += `<button style="cursor: pointer; padding: 6px 12px; margin: 8px;">${interpolateVariables(elem.text, variables)}</button><br>`;
+                    case 'button': {
+                        const initText = interpolateVariables(elem.text || '', variables);
+                        const w = elem.width ? `width: ${elem.width}px;` : '';
+                        const h = elem.height ? `height: ${elem.height}px;` : '';
+                        bodyContent += `<button data-mid="${mid}" data-name="${escapeAttr(elem.name || '')}" style="${posStyle} cursor: pointer; padding: 6px 12px; ${w} ${h}">${initText}</button>`;
+                        bind.text = elem.text;
                         break;
-                    case 'text':
-                        bodyContent += `<p style="margin: 8px;">${interpolateVariables(elem.text, variables)}</p>`;
+                    }
+                    case 'text': {
+                        const tag = elem.tag || 'p';
+                        const initText = interpolateVariables(elem.text || '', variables);
+                        bodyContent += `<${tag} data-mid="${mid}" style="${posStyle} margin: 0;">${initText}</${tag}>`;
+                        bind.text = elem.text;
                         break;
-                    case 'input':
-                        bodyContent += `<input type="text" placeholder="${interpolateVariables(elem.placeholder, variables)}" style="padding: 6px; margin: 8px;"><br>`;
+                    }
+                    case 'input': {
+                        const initPlaceholder = interpolateVariables(elem.placeholder || '', variables);
+                        bodyContent += `<input data-mid="${mid}" type="text" placeholder="${escapeAttr(initPlaceholder)}" style="${posStyle} padding: 6px;">`;
+                        bind.placeholder = elem.placeholder;
                         break;
-                    case 'progress':
-                        const progressValue = interpolateVariables(String(elem.value), variables);
-                        const progressMax = interpolateVariables(String(elem.max), variables);
-                        bodyContent += `<progress value="${progressValue}" max="${progressMax}" style="width: 200px; margin: 8px;"></progress><br>`;
+                    }
+                    case 'progress': {
+                        const initVal = interpolateVariables(String(elem.value), variables);
+                        const initMax = interpolateVariables(String(elem.max), variables);
+                        const w = elem.width ? `width: ${elem.width}px;` : 'width: 200px;';
+                        const h = elem.height ? `height: ${elem.height}px;` : '';
+                        bodyContent += `<progress data-mid="${mid}" value="${escapeAttr(initVal)}" max="${escapeAttr(initMax)}" style="${posStyle} ${w} ${h}"></progress>`;
+                        bind.value = String(elem.value);
+                        bind.max = String(elem.max);
                         break;
-                    case 'checkbox':
-                        bodyContent += `<div style="margin: 8px;"><input type="checkbox"> ${interpolateVariables(elem.text, variables)}</div>`;
+                    }
+                    case 'checkbox': {
+                        const initLabel = interpolateVariables(elem.text || '', variables);
+                        bodyContent += `<div style="${posStyle}"><input type="checkbox" data-name="${escapeAttr(elem.name || '')}"> <span data-mid="${mid}">${initLabel}</span></div>`;
+                        bind.text = elem.text;
                         break;
-                    case 'heading':
-                        bodyContent += `<h${elem.level}>${interpolateVariables(elem.text, variables)}</h${elem.level}>`;
+                    }
+                    case 'heading': {
+                        // Legacy fallback if migration somehow didn't run
+                        const lvl = elem.level || 1;
+                        const initText = interpolateVariables(elem.text || '', variables);
+                        bodyContent += `<h${lvl} data-mid="${mid}" style="${posStyle} margin: 0;">${initText}</h${lvl}>`;
+                        bind.text = elem.text;
                         break;
-                    case 'image':
-                        const imageSrc = interpolateVariables(elem.src, variables);
-                        bodyContent += `<img src="${imageSrc}" style="width: ${elem.width}px; height: ${elem.height}px; object-fit: cover; margin: 8px;">`;
+                    }
+                    case 'image': {
+                        const initSrc = interpolateVariables(elem.src || '', variables);
+                        if (initSrc) {
+                            bodyContent += `<img data-mid="${mid}" src="${escapeAttr(initSrc)}" style="${posStyle} width: ${elem.width}px; height: ${elem.height}px; object-fit: cover;">`;
+                            bind.src = elem.src;
+                        }
                         break;
+                    }
+                }
+
+                if (Object.keys(bind).length > 1) {
+                    elementsForBinding.push(bind);
                 }
             });
+
+            // Declare each unique variable name once at the top of the preview.
+            // The value comes from a top-level block of that name if one exists;
+            // otherwise the type's default (0 or ""). Nested variable blocks
+            // become assignments handled inside their parent's body.
+            const namesSeen = new Set();
+            const varDeclList = [];
+            for (const block of state.backElements) {
+                if (block.type !== 'variable' && block.type !== 'string') continue;
+                if (!isValidIdentifier(block.name)) continue;
+                if (namesSeen.has(block.name)) continue;
+                namesSeen.add(block.name);
+                const topLevel = state.backElements.find(b =>
+                    (b.type === 'variable' || b.type === 'string') &&
+                    b.name === block.name && b.parentId == null
+                );
+                let initial;
+                if (topLevel) {
+                    const v = topLevel.value;
+                    initial = (v == null || String(v).trim() === '')
+                        ? (topLevel.type === 'string' ? '""' : '0')
+                        : v;
+                } else {
+                    initial = block.type === 'string' ? '""' : '0';
+                }
+                varDeclList.push(`var ${block.name} = ${initial};`);
+            }
+            const varDecls = varDeclList.join('\n');
+
+            // Top-level loops still run once when the preview loads — they're
+            // for one-shot computation, and re-running them every event would
+            // produce surprising side effects.
+            const initCode = state.backElements
+                .filter(b => b.parentId == null && b.type === 'loop')
+                .sort((a, b) => (a.y || 0) - (b.y || 0))
+                .map(b => generateBlockCode(b))
+                .filter(Boolean)
+                .join('\n');
+
+            // Top-level `if`s are re-evaluated after every event so they
+            // automatically respond to variable changes (e.g. `if (hp < 1) hp = 10`
+            // re-fires whenever something updates `hp`). Sorted by Y so the
+            // execution order matches the visual top-to-bottom order on screen.
+            const checksCode = state.backElements
+                .filter(b => b.parentId == null && b.type === 'if')
+                .sort((a, b) => (a.y || 0) - (b.y || 0))
+                .map(b => generateBlockCode(b))
+                .filter(Boolean)
+                .join('\n');
+
+            // Build event-handler script (with if/loop nesting). Each handler calls
+            // _runChecks() afterward to re-evaluate top-level if blocks, then
+            // _render() so [var] placeholders pick up any new values.
+            let eventScript = '';
+            state.backElements.forEach(handler => {
+                if (handler.type === 'onclick' && handler.buttonName && handler.action) {
+                    const { prefix, suffix } = getNestingWrapper(handler);
+                    eventScript += `
+                        document.querySelectorAll('button[data-name="${handler.buttonName}"]').forEach(el => {
+                            el.addEventListener('click', () => {
+                                try { ${prefix} ${handler.action} ${suffix} } catch (err) { console.error(err); }
+                                try { _runChecks(); } catch (err) { console.error(err); }
+                                _render();
+                            });
+                        });
+                    `;
+                } else if (handler.type === 'onchange' && handler.checkboxName && handler.action) {
+                    const { prefix, suffix } = getNestingWrapper(handler);
+                    eventScript += `
+                        document.querySelectorAll('input[type="checkbox"][data-name="${handler.checkboxName}"]').forEach(el => {
+                            el.addEventListener('change', () => {
+                                try { ${prefix} ${handler.action} ${suffix} } catch (err) { console.error(err); }
+                                try { _runChecks(); } catch (err) { console.error(err); }
+                                _render();
+                            });
+                        });
+                    `;
+                }
+            });
+
+            const userCss = generateCSSText();
+            const elementsJson = JSON.stringify(elementsForBinding);
 
             return `
                 <!DOCTYPE html>
@@ -2207,11 +3780,45 @@
                     <meta charset="UTF-8">
                     <title>Preview</title>
                     <style>
-                        body { font-family: system-ui, -apple-system, sans-serif; margin: 20px; }
+                        body { font-family: system-ui, -apple-system, sans-serif; margin: 0; padding: 0; position: relative; min-width: ${maxX}px; min-height: ${maxY}px; }
+                        ${userCss}
                     </style>
                 </head>
                 <body>
                     ${bodyContent}
+                    <script>
+                        ${varDecls}
+                        ${initCode}
+                        var _elements = ${elementsJson};
+                        function _subst(template) {
+                            if (template == null) return '';
+                            return String(template).replace(/\\[(\\w+)\\]/g, function (m, name) {
+                                try {
+                                    var v = window[name];
+                                    return (v === undefined || v === null) ? m : v;
+                                } catch (e) { return m; }
+                            });
+                        }
+                        function _render() {
+                            _elements.forEach(function (item) {
+                                var el = document.querySelector('[data-mid="' + item.id + '"]');
+                                if (!el) return;
+                                if ('text' in item) el.innerHTML = _subst(item.text);
+                                if ('value' in item) el.setAttribute('value', _subst(item.value));
+                                if ('max' in item) el.setAttribute('max', _subst(item.max));
+                                if ('placeholder' in item) el.placeholder = _subst(item.placeholder);
+                                if ('src' in item) el.src = _subst(item.src);
+                            });
+                        }
+                        function _runChecks() {
+                            ${checksCode}
+                        }
+                        document.addEventListener('DOMContentLoaded', function () {
+                            try { _runChecks(); } catch (err) { console.error(err); }
+                            _render();
+                            ${eventScript}
+                        });
+                    <\/script>
                 </body>
                 </html>
             `;
@@ -2221,7 +3828,8 @@
         document.getElementById('exportBtn').addEventListener('click', () => {
             const projectData = {
                 frontElements: state.frontElements,
-                backElements: state.backElements
+                backElements: state.backElements,
+                cssRules: state.cssRules
             };
             
             const dataStr = JSON.stringify(projectData, null, 2);
@@ -2253,8 +3861,16 @@
                     if (projectData.frontElements && projectData.backElements) {
                         state.frontElements = projectData.frontElements;
                         state.backElements = projectData.backElements;
+                        state.cssRules = projectData.cssRules || [];
+                        // Backfill any missing fields on older CSS rules
+                        state.cssRules.forEach(r => {
+                            if (r.backgroundColor === undefined) r.backgroundColor = '';
+                            if (r.backgroundImage === undefined) r.backgroundImage = '';
+                        });
+                        migrateFrontElements();
                         renderFrontElements();
                         renderBackElements();
+                        renderCssRules();
                         playSound('success');
                         alert('Project loaded successfully!');
                     } else {
@@ -2269,10 +3885,48 @@
             e.target.value = '';
         });
 
+        canvas.addEventListener('mousedown', (e) => {
+            if (e.target !== canvas) return;
+            if (e.button !== 0) return;
+            const rect = canvas.getBoundingClientRect();
+            state.marquee = {
+                startX: e.clientX - rect.left,
+                startY: e.clientY - rect.top,
+                currentX: e.clientX - rect.left,
+                currentY: e.clientY - rect.top,
+                area: 'canvas',
+                additive: e.shiftKey
+            };
+            if (!e.shiftKey) {
+                state.selectedFrontIds.clear();
+                state.selectedElement = null;
+                refreshSelectionVisuals();
+            }
+        });
+
         canvas.addEventListener('click', (e) => {
             if (e.target === canvas) {
                 state.selectedElement = null;
                 document.querySelectorAll('.canvas-item.selected').forEach(el => el.classList.remove('selected'));
+            }
+        });
+
+        codeWorkspace.addEventListener('mousedown', (e) => {
+            if (e.target !== codeWorkspace) return;
+            if (e.button !== 0) return;
+            const rect = codeWorkspace.getBoundingClientRect();
+            state.marquee = {
+                startX: e.clientX - rect.left,
+                startY: e.clientY - rect.top,
+                currentX: e.clientX - rect.left,
+                currentY: e.clientY - rect.top,
+                area: 'code',
+                additive: e.shiftKey
+            };
+            if (!e.shiftKey) {
+                state.selectedBackIds.clear();
+                state.selectedCode = null;
+                refreshSelectionVisuals();
             }
         });
 
@@ -2283,8 +3937,194 @@
             }
         });
 
+        // ---- Copy / Cut / Paste / Duplicate / Delete ----
+
+        function deepClone(obj) {
+            return JSON.parse(JSON.stringify(obj));
+        }
+
+        // Collect all back-tab descendants of a given block id (recursive)
+        function collectBackDescendants(rootId) {
+            const out = [];
+            const stack = [rootId];
+            while (stack.length) {
+                const pid = stack.pop();
+                state.backElements.forEach(b => {
+                    if (b.parentId === pid) {
+                        out.push(b);
+                        if (b.type === 'if' || b.type === 'loop') stack.push(b.id);
+                    }
+                });
+            }
+            return out;
+        }
+
+        function copySelection() {
+            if (state.currentTab === 'front' && state.selectedFrontIds.size > 0) {
+                const items = state.frontElements
+                    .filter(e => state.selectedFrontIds.has(e.id))
+                    .map(deepClone);
+                state.clipboard = { kind: 'front', items };
+                return true;
+            }
+            if (state.currentTab === 'back' && state.selectedBackIds.size > 0) {
+                // Pull each selected block + its full subtree
+                const items = [];
+                const seen = new Set();
+                state.selectedBackIds.forEach(id => {
+                    const root = state.backElements.find(b => b.id === id);
+                    if (!root) return;
+                    if (seen.has(id)) return;
+                    seen.add(id);
+                    // Detach the root from its parent (paste happens at top level)
+                    const rootCopy = deepClone(root);
+                    rootCopy.parentId = null;
+                    items.push(rootCopy);
+                    collectBackDescendants(id).forEach(d => {
+                        if (seen.has(d.id)) return;
+                        seen.add(d.id);
+                        items.push(deepClone(d));
+                    });
+                });
+                state.clipboard = { kind: 'back', items };
+                return true;
+            }
+            return false;
+        }
+
+        function deleteSelection() {
+            let changed = false;
+            if (state.selectedFrontIds.size > 0) {
+                const ids = state.selectedFrontIds;
+                state.frontElements = state.frontElements.filter(e => !ids.has(e.id));
+                state.selectedFrontIds.clear();
+                renderFrontElements();
+                changed = true;
+            }
+            if (state.selectedBackIds.size > 0) {
+                // Delete each selected block and all of its descendants
+                const toDelete = new Set(state.selectedBackIds);
+                state.selectedBackIds.forEach(id => {
+                    collectBackDescendants(id).forEach(d => toDelete.add(d.id));
+                });
+                state.backElements = state.backElements.filter(b => !toDelete.has(b.id));
+                state.selectedBackIds.clear();
+                renderBackElements();
+                changed = true;
+            }
+            if (changed) playSound('delete');
+            return changed;
+        }
+
+        function pasteClipboard() {
+            const cb = state.clipboard;
+            if (!cb || !cb.items.length) return false;
+
+            const offset = 20;
+            // Generate a fresh id for each pasted item, remembering the old→new mapping
+            // so parent references inside back-tab subtrees are preserved.
+            const idMap = new Map();
+            const baseId = Date.now();
+            cb.items.forEach((item, i) => {
+                idMap.set(item.id, baseId + i);
+            });
+
+            if (cb.kind === 'front' && state.currentTab === 'front') {
+                state.selectedFrontIds.clear();
+                cb.items.forEach(orig => {
+                    const copy = deepClone(orig);
+                    copy.id = idMap.get(orig.id);
+                    copy.x = (copy.x || 0) + offset;
+                    copy.y = (copy.y || 0) + offset;
+                    state.frontElements.push(copy);
+                    state.selectedFrontIds.add(copy.id);
+                });
+                renderFrontElements();
+                playSound('success');
+                return true;
+            }
+
+            if (cb.kind === 'back' && state.currentTab === 'back') {
+                state.selectedBackIds.clear();
+                cb.items.forEach(orig => {
+                    const copy = deepClone(orig);
+                    copy.id = idMap.get(orig.id);
+                    if (copy.parentId != null && idMap.has(copy.parentId)) {
+                        copy.parentId = idMap.get(copy.parentId);
+                    } else {
+                        copy.parentId = null;
+                        copy.x = (copy.x || 0) + offset;
+                        copy.y = (copy.y || 0) + offset;
+                    }
+                    state.backElements.push(copy);
+                    if (copy.parentId == null) state.selectedBackIds.add(copy.id);
+                });
+                renderBackElements();
+                playSound('success');
+                return true;
+            }
+            return false;
+        }
+
+        function isTypingTarget(target) {
+            if (!target) return false;
+            const tag = target.tagName;
+            if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return true;
+            if (target.isContentEditable) return true;
+            // If an editor menu is open, treat any of its inputs as typing
+            if (target.closest && target.closest('.editor-menu, .settings-modal, .help-modal')) return true;
+            return false;
+        }
+
+        document.addEventListener('keydown', (e) => {
+            // Don't intercept while typing in inputs or with modal/editor open
+            if (isTypingTarget(e.target)) return;
+            // Skip when not on Front or Back tabs
+            if (state.currentTab !== 'front' && state.currentTab !== 'back') return;
+
+            const mod = e.ctrlKey || e.metaKey;
+            const key = e.key.toLowerCase();
+
+            if (mod && key === 'c') {
+                if (copySelection()) e.preventDefault();
+            } else if (mod && key === 'x') {
+                if (copySelection()) {
+                    deleteSelection();
+                    e.preventDefault();
+                }
+            } else if (mod && key === 'v') {
+                if (pasteClipboard()) e.preventDefault();
+            } else if (mod && key === 'd') {
+                // Duplicate = copy then immediately paste
+                if (copySelection()) {
+                    pasteClipboard();
+                    e.preventDefault();
+                }
+            } else if (mod && key === 'a') {
+                // Select all on the active tab
+                if (state.currentTab === 'front') {
+                    state.frontElements.forEach(el => state.selectedFrontIds.add(el.id));
+                    refreshSelectionVisuals();
+                    e.preventDefault();
+                } else if (state.currentTab === 'back') {
+                    state.backElements.forEach(el => {
+                        if (el.parentId == null) state.selectedBackIds.add(el.id);
+                    });
+                    refreshSelectionVisuals();
+                    e.preventDefault();
+                }
+            } else if (key === 'delete' || key === 'backspace') {
+                if (deleteSelection()) e.preventDefault();
+            } else if (key === 'escape') {
+                clearAllSelections();
+            }
+        });
+
+        migrateFrontElements();
         renderFrontElements();
         renderBackElements();
+        renderCssRules();
+        applySnapGridVisuals();
     </script>
 </body>
 </html>
